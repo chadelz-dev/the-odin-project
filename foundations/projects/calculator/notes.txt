@@ -1,0 +1,249 @@
+-- NB
+ - Requirements:
+
+-- 1. basic math operators:
+
+ - add
+ - subtract
+ - multiply
+ - divide
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- 2. calculator operation:
+
+ - the operation must consist of a:
+
+   - number, 
+   - operator,
+   - another number.
+
+ - for ex: 3 + 5 creates three variables, one for each part of the operation.
+
+   - these variables get used to update the display
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- 3. basic html calculator:
+
+ - include: buttons for each number and  operator (including =), 
+   
+   - add a display to show the past equation and current equation
+
+   - add a clear button (it must reset everything)
+
+
+   - extra bonus additions:
+
+     - add a . button for decimals (but only one decimal point)
+
+       - disable the button if it has already been pressed
+
+     - add a backspace button to undo last input if wrong button was clicked
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- 4. create functions that populate display when a button is clicked:
+
+ - store the content of the display (the number) in a variable for next step
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- 5. make the calculator work
+
+ - store first and second numbers entered by the user,
+
+ - store the operator entered
+
+ - then operatore() on them when the = button is pressed
+
+// //////
+
+ 
+ - you should already have the code that can populate the display,
+
+   - once the operate() func has been called, update the dispplay with results
+
+   - you need to figure out how to store all the values,
+
+   - and then call the operate() func with them.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- gotcha's to watch out for:
+
+ - calculator should NOT evaluate more than a single pair of numbers at a time.
+
+   - ex: 
+
+     - you enter a number 12
+     - followed by an operator +
+     - a second number 7
+     - and a second operator -
+       - 12 + 7 -
+  
+     - calc should evaluate the initial pair  12 + 7 and display the result 19
+  
+     - then use the result 19 as the first number in a new calculation,
+     - along with the next operator - making it 19 - 
+  
+     - if another number is pressed, it completes the pair 19 - x
+     - if another operator is pressed it replaces the old operator 
+
+
+ - round answers down to 2 decimal places
+
+
+ - pressing = before entering all required numbers should do nothing
+
+
+ - display a sarcastic error message for when someone tries to divide by 0
+
+
+ - calculator should only take 1 operator at a time.
+
+   - if someone presses an operator twice, 
+
+     - it should only replace the old operator with the newly selected operator
+
+     - so 2 + - would only be taken as 2 -
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- extra bonus:
+
+ - add keyboad support
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Note on code:
+
+flex: 1 0 21%
+
+
+-- code explained:
+
+ - short hand for 3 flex properties
+
+   - flex-grow: 1 
+   - flex-shrink: 0
+   - flex-basis: 21%
+
+
+ - flex-basis: 21%
+
+   - sets initial size of each button to 21% of the container width
+
+   - with 21% width per button, you can fit 4 buttons per row (trial and error)
+
+     - 21% x 4 is like having 84% of the space taken update
+     - the remaining space (16%) is distributed between gaps/spacing etc
+
+
+ - flex-grow: 1
+
+   - allows the buttons to grow equally to fill available space
+
+   - makes sure buttons align perfectly in our flexbox grid
+
+
+ - flex-shrink: 0 
+
+   - prevents the button from shrinking below their flex basis size 
+
+   - maintains consistent buttons sizing
+
+
+-- Visual breakdown:
+
+using 21%
+
+|--21%--|--21%--|--21%--|--21%--| = 84%
+  btn1    btn2    btn3    btn4    + 16% spacing
+
+
+
+If we used 25% instead of 21%:
+
+|--25%--|--25%--|--25%--|--25%--| = 100%
+  btn1    btn2    btn3    btn4    (no room for spacing)
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- short notes on functions used:
+
+
+-- appendNumber(number):
+
+ - resets display if shouldResetDisplay is true.
+ - appends the provided number to the largerDisplay.
+
+
+-- appendDecimal():
+
+ - resets display if shouldResetDisplay is true.
+ - appends a decimal point if it doesn’t already exist in largerDisplay.
+
+
+-- setOperation(operator):
+
+ - evaluates current operation if an operator is already set.
+ - stores firstNumber and sets the operator.
+ - updates smallerDisplay and prepares for the next input.
+
+
+-- evaluate():
+
+ - returns early if no operator or display reset is needed.
+ - computes the result based on the operator (+, -, x, ÷).
+ - updates smallerDisplay with the operation and result.
+ - resets the operator and prepares for the next input.
+
+
+-- clear():
+
+ - resets both displays and clears all stored numbers and the operator.
+
+
+-- deleteLastInput():
+
+ - removes the last character from largerDisplay.
+
+
+-- togglePosNeg():
+
+ - toggles the sign of the current number in largerDisplay.
+
+
+-- convertToPercentage():
+
+ - converts the number in largerDisplay to a percentage and displays it with
+    2 decimal places.
+
+
+-- handleKeyboardInput(e):
+
+ - Handles keyboard inputs:
+
+   - numbers (0-9): Calls appendNumber.
+
+   - operators (+, -, x, ÷): Calls setOperation.
+
+   - equals (Enter, =): Calls evaluate.
+
+   - decimal (.): Calls appendDecimal.
+
+   - backspace: Calls deleteLastInput.
+
+   - escape: Calls clear.
+
+   - %: Calls convertToPercentage.

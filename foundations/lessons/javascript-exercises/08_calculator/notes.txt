@@ -1,0 +1,37 @@
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- what is a factorial calculation?
+
+A factorial is simply multiplying a number
+ by all the numbers below it down to 1. It's written as "n!"
+
+For example:
+
+4! = 4 × 3 × 2 × 1 = 24
+3! = 3 × 2 × 1 = 6
+5! = 5 × 4 × 3 × 2 × 1 = 120
+
+Think of it like counting down from the number 
+ and multiplying each step along the way. 
+
+By mathematical definition, 0! equals 1 (this is just a special case).
+
+-- why is 0 equal to 1 in factorial calculations? (0! = 1 in spec.js)
+
+It makes combinatorial mathematics work properly 
+(when calculating permutations and combinations)
+
+It maintains consistency with the pattern that n! = n × (n-1)!
+ there is exactly ONE way to arrange zero items (do nothing), 
+  thus 0! = 1. 
+  
+If 0! were equal to 0.
+ many mathematical formulas would break down if this weren't the case.
+
+// ////////////////////////////////////////////////////////////////////////////
+

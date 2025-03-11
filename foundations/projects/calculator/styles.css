@@ -1,0 +1,121 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+  background-color: #fdf6e3;
+}
+
+.calculatorContainer {
+  display: flex;
+  background-color: #fdf6e3;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator {
+  background-color: #666760;
+  display: flex;
+  flex-direction: column;
+  height: 30rem;
+  width: 15rem;
+  border-radius: 0.75rem;
+  padding: 0.25rem;
+}
+
+.displayContainer {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  padding-right: 0.4rem;
+}
+.calculatorHeading {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+}
+
+.smallerEquationDisplay {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #b1afaf;
+}
+
+.largerCurrentInputDisplay {
+  height: 35%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: white;
+}
+
+.buttonsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  height: 70%;
+  padding: 0.5rem;
+}
+
+.buttonsGrid button {
+  flex: 1 0 21%; /* This creates a 4-column grid see notes */
+  height: 3rem;
+  border-radius: 100%;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.numberSevenButton,
+.numberEightButton,
+.numberNineButton,
+.numberFourButton,
+.numberFiveButton,
+.numberSixButton,
+.numberOneButton,
+.numberTwoButton,
+.numberThreeButton,
+.posNegButton,
+.zeroButton,
+.decimalPointButton {
+  background-color: #818276;
+}
+
+.clearAllButton,
+.deleteLastInputButton,
+.percentageButton {
+  background-color: #a8a99e;
+}
+
+.divisionButton,
+.multiplicationButton,
+.subtractionButton,
+.additionButton,
+.equalsButton {
+  background-color: rgb(255, 159, 25);
+}

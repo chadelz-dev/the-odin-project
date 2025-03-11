@@ -1,0 +1,20 @@
+p.odd {
+    background-color: rgb(240, 164, 177);
+    font-family: Verdana, DejaVu, sans-serif;
+}
+
+p.special {
+    font-size: 24px;
+}
+
+div#first_Even {
+    color: rgb(83, 83, 180);
+    font-size: 36px;
+}
+
+div#second_Even {
+    background-color: rgb(191, 230, 191);
+    font-size: 24px;
+    font-weight: bold;
+
+}

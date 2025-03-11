@@ -1,0 +1,1084 @@
+
+// ////////////////////////////////////////////////////////////////////////////
+
+console.log('// ////////////////////////////');
+console.log('Array Methods');
+
+-- Intermediate / Advanced Array Magic (the odin proj)
+
+ - Arrays are powerful for data storage and manipulation.
+
+   - mastering a few methods like map, filter and reduce allow you to:
+
+     - simplify complex tasks.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Example sumOfTripledEvens
+
+ - this function will:
+
+   - take an array,
+   - filter even numbers,
+   - triple them,
+   - sum the results.
+
+
+-- basic implementation 
+
+function sumOfTripledEvens(array) {
+  let sum = 0;
+  for (let i = 0; i < array.length; i++) {
+
+    // 1. check if the number is even
+    if (array[i] % 2 === 0) {
+
+        // 2. triple the even number
+        const tripleEvenNumber = array[i] * 3;
+
+        // 3. add the tripled even number to sum
+        sum += tripleEvenNumber;
+    }
+  }
+  return sum;
+}
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- The Map Method
+
+ - transforms each element in an array and returns a new array,
+
+   - original array remains unchanged
+
+ - expects a callback as an argument:
+
+   - which basically means, pass a function as an argument to this function.
+
+   - takes the callback function and iterates over each element in the array.
+
+     - the callback function should take an argument,
+
+
+-- code example:
+
+function addOne(num) {
+  return num + 1;
+}
+const arr = [1, 2, 3, 4, 5];
+const mappedArr = arr.map(addOne); // create new array with map()
+
+console.log(mappedArr); // Outputs [2, 3, 4, 5, 6]
+
+// original array not changed!
+console.log(arr); // Outputs [1, 2, 3, 4, 5]
+
+
+-- Map() Inline Functions
+
+ - an inline function is a function that is defined and called at the same time.
+
+ - you can define an inline function as the argument to map() too
+
+   - much better if you only need a simple function
+
+
+code example:
+
+const inlineMappedArr = arr.map((num) => num + 1); // creates new array
+console.log(inlineMappedArr); // Outputs [2, 3, 4, 5, 6]
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- The Filter Method
+
+ - filters elements based on a condition and returns a new array.
+
+   - takes a callback function that returns true or false.
+
+   - includes elements in the new array, ONLY IF the callback returns true.
+
+
+-- Code Example:
+
+function isOdd(num) {
+  return num % 2 !== 0;
+}
+
+const oddNums = arr.filter(isOdd); // creates new array with filter()
+console.log(oddNums); // Outputs [1, 3, 5];
+
+console.log(arr); // Outputs [1, 2, 3, 4, 5], original array is not affected
+
+
+-- code explained:
+
+ - filter() iterates over each element in the array, one at a time (obvs)
+
+   - if an element returns true, it is included in the new array.
+
+   - if an element returns false, it is not included in the new array.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- The Reduce Method
+
+ - also expects a callback function.
+
+   - the difference between reduce and the other 2 methods map and filter:
+
+
+ - NB 
+   - reduce() takes 2 arguments:
+
+     - 1. the callback function and,
+
+     - 2. an initial value as an optional second argument.
+ 
+     - ex: reduce(callback, initialValue)
+
+ - NB
+   - the callback function takes 2 arguments:
+
+     - 1. an accumulator - the current result,
+
+     - 2. currentElement -  the current element being processed from the array
+
+     - ex: reduce(  (total, currentNum) => total * currentNum, initialValue  );
+
+
+-- code ex:
+
+const productOfAllNums = arr.reduce((total, currentItem) => {
+  return total * currentItem;
+}, 1); // , 1 is the initial value of the accumulator.
+
+console.log(productOfAllNums); // Outputs 120;
+
+console.log(arr); // Outputs [1, 2, 3, 4, 5]
+
+const productOfAllNumsInitFive = arr.reduce((total, currentItem) => {
+  return total * currentItem;
+}, 5); // , 5 is the initial value of the accumulator.
+
+console.log(productOfAllNumsInitFive); // Outputs 1200;
+
+
+
+
+
+// ////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Array Methods from javascript.info
+
+
+-- Add/Remove Items
+
+arr.push(...items) – Add items to the end.
+
+arr.pop() – Remove the last item.
+
+arr.shift() – Remove the first item.
+
+arr.unshift(...items) – Add items to the beginning.
+
+
+-- code ex:
+
+let flowers = ["rose", "tulip", "lily"];
+
+// 1. arr.push(...items) – Add items to the end
+flowers.push("daisy");
+console.log(flowers); // ["rose", "tulip", "lily", "daisy"]
+
+// 2. arr.pop() – Remove the last item
+flowers.pop();
+console.log(flowers); // ["rose", "tulip", "lily"]
+
+// 3. arr.shift() – Remove the first item
+flowers.shift();
+console.log(flowers); // ["tulip", "lily"]
+
+// 4. arr.unshift(...items) – Add items to the beginning
+flowers.unshift("orchid");
+console.log(flowers); // ["orchid", "tulip", "lily"]
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- splice() - Add/Remove/Replace items
+
+ - modifies the original array by inserting, removing or replacing elements.
+
+ - returns an array of removed items.
+
+ - the syntax:
+
+arr.splice(start[, deleteCount, elem1, ..., elemN])
+
+
+-- syntax explained:
+
+ - 1. start - the index at which to start changing the array.
+
+ - 2. deleteCount - the number of elements to remove.
+
+ - 3. elem1, ..., elemN - the elements to add to the array.
+
+ - if deleteCount is omitted, 
+   
+   - then all elements from start to the end of the array will be deleted.
+
+   - to insert without deleting, use deleteCount = 0.
+
+// //////
+  
+-- code examples:
+
+-- removing elements using splice()
+
+let colors = ["red", "green", "blue"];
+
+// changing colors array
+colors.splice(1, 1); // From index 1, remove 1 element
+
+console.log(colors); // ["red", "blue"]
+
+// //////
+
+
+-- replace and remove elements using splice()
+
+let fruits = ["apple", "banana", "cherry", "date"];
+
+// changing fruits array
+fruits.splice(0, 3, "kiwi", "grape"); // Remove 3 elements, insert 2
+
+console.log(fruits); // ["kiwi", "grape", "date"]
+
+// //////
+
+
+-- Get Removed Elements in a New Array
+
+let animals = ["cat", "dog", "rabbit", "fox"];
+
+// getting removed elements
+let removedAnimals = animals.splice(0, 2); // Remove 2 elements from the start
+
+console.log(removedAnimals); // ["cat", "dog"]
+
+// //////
+
+
+-- Insert Without Removal
+
+let tech = ["laptop", "mouse", "keyboard"];
+
+tech.splice(2, 0, "monitor", "printer"); // Insert at index 2 without removing
+
+console.log(tech); // ["laptop", "mouse", "monitor", "printer", "keyboard"]
+
+// //////
+
+
+-- Using Negative Numbers
+
+ - specify the position from the end of the array.
+
+ - -0 is the same as array.length
+
+
+let numbers = [10, 20, 50];
+
+console.log(numbers); // [10, 20, 50]
+
+numbers.splice(-1, 0, 30, 40); // Insert before the last element
+
+console.log(numbers); // [10, 20, 30, 40, 50]
+
+// insert at the end with arr.length
+numbers.splice(numbers.length, 0, 60, 70); // Equivalent to -0
+
+console.log(numbers); // [10, 20, 30, 40, 50, 60, 70]
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- slice() Method
+
+ - makes a shallow copy of the original array and does not modify the original
+
+ - much simpler than the splice() method, the slice() method syntax:
+
+array.slice([start], [end])
+
+
+-- syntax explained:
+
+ - it returns a new array copying to it:
+
+   - all items from index position start to end (but not including end).
+
+   - if start is negative, then it is counted from the end.
+
+   - if end is not provided, then slice() copies till the end of the array.
+
+ 
+let letters = ["a", "b", "c", "d"];
+
+console.log(letters.slice(0, 3)); // a, b, c
+console.log(letters.slice(-2)); // c, d
+console.log(letters.slice()); // ["a", "b", "c", "d"] (shallow copy)
+
+console.log(letters); // ["a", "b", "c", "d"] (original array is not modified)
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- concat() Method
+
+ - creates a new array by joining array with 1 or more arrays or values.
+
+ - copies elements from array or values but does not flatten other objects,
+
+   - unless they have the Symbol.isConcatSpreadable property.
+
+
+ - the syntax:
+
+array.concat(arg1, arg2...)
+
+
+-- syntax explained:
+
+ - arg1, arg2... - arrays and/or values to concatenate to the array.
+  
+   - if an array is provided, its elements are added to the new array.
+  
+   - if a value is provided, the value itself is added to the new array.
+
+
+let concatArray = [1, 2, 3];
+let anotherArray = [4, 5];
+let andAnotherArray = [6, 7];
+
+console.log(concatArray);
+console.log(anotherArray);
+console.log(andAnotherArray);
+
+// single value 
+console.log(concatArray.concat(anotherArray)); // [1, 2, 3, 4, 5]
+
+// multiple arrays
+console.log(concatArray.concat(anotherArray, andAnotherArray)); // [1, 2, 3, 4, 5, 6, 7]
+
+// multiple values
+console.log(concatArray.concat(anotherArray, "a space between", andAnotherArray, [8, 9], 10)); // [1, 2, 3, 4, 5, "a space between", 6, 7, 8, 9, 10]
+
+// //////
+
+
+-- Array-Like Objects (with Symbol.isConcatSpreadable property)
+
+let arrayLikeObject = {
+  0: "you",
+  1: "got",
+  2: "it",
+  length: 3,
+  [Symbol.isConcatSpreadable]: true
+}
+
+console.log(concatArray.concat(arrayLikeObject, anotherArray, 6)); // [1, 2, 3, "you", "got", "it", 4, 5, 6]
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- iterate - forEach() Method
+
+ - executes a provided function once for each array element.
+
+ - the syntax:
+
+array.forEach(function(currentValue, index, array) {
+  // your code here
+}
+
+let shapes = [ "square", "rectangle", "circle", "triangle" ];
+
+shapes.forEach((shape, index, array) => {
+  console.log(`${shape} is at index ${index} in the array ${array}`); 
+})
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- indexOf(), lastIndexOf() and includes() Methods
+
+-- indexOf() Method
+
+ - indexOf() searches for item from the beginning of the array.
+   
+   - returns the first index at which a given element can be found in the array
+
+     - even if there are more occurrences of the item (see lastIndexOf() below)
+   
+   -  or -1 if it is not present.  
+
+
+ - the syntax:
+
+ array.indexOf(searchElement[, fromIndex])
+
+
+-- syntax explained:
+
+ - searchElement - the element to locate in the array.
+
+ - fromIndex - the index to start the search at. 
+
+   - optional, defaults to 0 and searches the whole array.
+   
+   - a negative value searches backwards from the end of the array.
+
+
+
+-- code examples:
+
+let tools = ["hammer", "screwdriver", "wrench", "hammer];
+
+console.log(tools.indexOf("screwdriver")); // 1
+
+console.log(tools.indexOf("drill")); // -1
+
+
+// ////// 
+
+-- lastIndexOf() Methods
+
+ - same as indexOf() but searches for the last occurrence of an item.
+
+   - and then compare  that with indexOf()
+
+console.log(tools.lastIndexOf("hammer")); // 3
+
+console.log(tools.indexOf("hammer")); // 0
+
+// //////
+
+-- includes() Methods
+
+ - checks if an array includes a certain value among its entries.
+
+ - returns true or false as appropriate.
+
+ - also handles NaN correctly
+
+console.log(tools.includes("wrench")); // true
+
+console.log(tools.includes("drill")); // false
+
+
+const numbersForIncludes = [1, 2, 3, NaN];
+
+// using includes() returns true
+console.log(numbersForIncludes.includes(NaN)); // true
+
+// using indexOf() returns -1 (or interpreted as false)
+console.log(numbersForIncludes.indexOf(NaN)); // -1
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Find(), FindIndex() and findLasIndex() Methods
+
+-- find() Method
+
+ - returns the value of the first element in the array 
+ 
+   - that satisfies the provided testing functions condition
+
+
+-- syntax 
+ 
+ - same for all:
+
+array.find(fn)
+
+array.FindIndex(function(currentValue, index, array) {
+  // your code here
+})
+
+array.findLasIndex((currentValue, index, array) => {
+  // your code here
+})
+
+
+code example:
+
+let users = [{id: 1, name: "Tom"}, {id: 2, name: "Jerry"}, {id: 3, name: "Tom"}];
+
+// define a user from users array
+let user = users.find(user => user.id == 1);
+console.log(user.name); // Tom
+
+// ////// 
+
+
+-- FindIndex() Method
+
+let userIndex = users.FindIndex(user => user.id == 1);
+console.log(userIndex); // 0
+
+// //////
+
+
+-- findLasIndex() Method
+
+let userLastIndex = users.findLasIndex(user => user.name = "Tom");
+console.log(userLastIndex); // 2
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- filter() Method 
+ 
+ - returns an array of all elements in the array 
+   
+   - that pass the test implemented by the provided function.
+
+ - the syntax:
+
+array.filter(fn)
+
+array.filter(function(currentValue, index, array) {
+  // your code here
+})
+
+array.filter((currentValue, index, array) => {
+  // your code here
+})
+
+
+-- code ex:
+
+let temperatures = [72, 85, 91, 78, 64, 95, 88];
+
+// Filter out temperatures above 80
+let hotDays = temperatures.filter(temp => temp > 80);
+
+alert(hotDays); // [85, 91, 95]
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- map() Method 
+
+ - creates a new array with 
+ 
+   - the results of calling a provided function on every element in the array.
+
+ - the syntax:
+
+array.map(fn)
+
+array.map(function(currentValue, index, array) {
+  // your code here
+})
+
+array.map((currentValue, index, array) => {
+  // your code here
+})
+
+
+-- code ex:
+
+let celsiusTemps = [0, 20, 30, 40, 100];
+let fahrenheitTemps = celsiusTemps.map(celsius => (celsius * 9/5) + 32);
+
+console.log(fahrenheitTemps); // [32, 68, 86, 104, 212]
+
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- sort() Method 
+
+ - sorts the elements of an array in place and returns the array.
+
+ - by default sort() converts items to strings and sorts lexicographically
+
+   - lexicographically means that:
+     
+      - 1. special characters come before letters and numbers
+
+      - 2. numbers come before letters
+        
+        - and are not sorted in numerical order, example being:
+
+          - 10 comes before 2 because 1 becomes before 2
+
+          - for numerical ordering, a compare function is needed (see below)
+
+      - 3. uppercase letters come before lowercase letters
+
+
+code example:
+
+// default sort() behavior
+
+let arrayForSorting = [15, 2, 1]; 
+arrayForSorting.sort();
+
+console.log(arrayForSorting); // 1, 15, 2 (incorrect)
+
+// //////
+
+
+-- sort() ascending numerically with a comparison function
+
+// numerical sorting with comparison function
+
+
+-- code ex:
+
+arrayForSorting.sort((a, b) => a - b);
+console.log(arrayForSorting); // 1, 2, 15 (correct ascending)
+
+
+-- code explained:
+
+ - the comparison function works by comparing two elements in the array,
+
+   - determining the relative order of two elements: a and b, 
+
+   - based on the return value of each iteration:
+
+
+     - if (a - b) returns a negative value (a - b = lessThanZero), 
+
+       - a is sorted to an index lower than b (so a comes before b)
+    
+
+     - if (a - b) returns a positive value (a - b = moreThanZero) 
+
+       - a is sorted to an index higher than b (so b comes before a)
+
+
+     - if (a - b) returns 0,
+
+       - the order of a and b remains unchanged.
+
+// //////
+
+
+-- sort descending numerically with a comparison function
+
+ - for descending order, we reverse the logic,
+ 
+   - by using (b - a) instead of (a - b)
+
+-- code ex:
+
+arrayForSorting.sort((a, b) => b - a);
+console.log(arrayForSorting); // 15, 2, 1 (correct descending)
+
+
+-- code explained:
+
+ - if b is smaller than a, b - a will be negative, so a comes first.
+
+ - if b is larger than a, b - a will be positive, so b comes first.
+
+ - if b is equal to a, b - a will be 0, so their order remains unchanged.
+
+
+
+// ///////
+
+
+-- for clarification:
+
+-- this is the inline comparison function:
+
+array.sort((a, b) => a - b); 
+
+-- same thing but as a normal function:
+
+function compare(a, b) {
+  return a - b;
+}
+
+-- to call it with an array:
+
+arrayForSorting.sort(compare);
+
+// ///////
+
+-- NB
+
+-- how this works on the array:
+
+ - on the first iteration the first two values are assigned to a and b:
+
+   - so a becomes 15 and b becomes 2,
+
+   - then we use the algorithm (b - a) so, 1 - 15 to determine the order:
+
+
+ - compare 15 and 1:
+
+   - where 1 - 15 = -14 (negative) -> 15 comes before 1
+
+
+ - compares 15 and 2:
+
+   - where 2 - 15 = -13 (negative) -> 15 comes before 2 again
+
+
+ - compare 1 and 2:
+
+   - where 2 - 1 = (positive) -> 2 comes first.
+
+// ///////
+
+
+-- localeCompare() method
+
+ - to correctly compare strings in different languages,
+
+   - use str.localeCompare(str2) to compare strings.
+
+-- code ex:
+
+let countries = [
+  'Österreich', 
+  'Ägypten', 
+  'Spanien', 
+  'Türkei', 
+  'Deutschland', 
+  'Ungarn', 
+  'Vietnam', 
+  'Andorra'
+  ]
+
+console.log(countries.sort()); // incorrect
+console.log(countries.sort((a, b) => a.localeCompare(b))); // correct
+
+-- code explained
+
+ - countries.sort((a, b) => a.localeCompare(b));
+
+   - sorts the array alphabetically, but in a locale-aware manner.
+   
+   - a and b are compared using the localeCompare() method.
+
+     - which iterates through each item, comparing them all.
+
+
+   - a.localeCompare(b) is a method that compares two strings b to a,
+   
+     - and returns a number indicating their relative order:
+
+     - if a is greater than b, it returns 1, 
+     
+     - if a is less than b, it returns -1, 
+     
+     - and if they are equal, it returns 0.
+
+// //////
+
+
+-- localeCompare() method in reverse
+
+console.log(countries.sort((a, b) => b.localeCompare(a)));
+
+
+-- code explained:
+
+ - does the same thing as above but instead of comparing b to a,
+
+ - it now compares a to b and returns a number indicating their relative order:
+
+   - which then iterates through each item, comparing them all.
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- reverse() method:
+
+ - reverses the order of the elements in an array.
+
+ - literally reverses the order in which the elements appear in an array.
+
+let ascendingNumbers = [1, 2, 3, 4, 5, 6, 7];
+
+ascendingNumbers.reverse();
+console.log(ascendingNumbers); // [7, 6, 5, 4, 3, 2, 1]
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- split() and join() methods:
+
+-- split method()
+
+ - splits a string into an array of substrings based on a delimiter.
+
+   - a delimiter is a character or a string that separates the substrings.
+
+   - ex: ',' or ' :' or ' ' or '; ' or '/' etc.
+
+
+-- code ex:
+
+let starWarsNames = "Luke Skywalker, Han Solo, Leia Organa, C-3PO, R2-D2";
+
+let arrayOfStarWarsNames = starWarsNames.split(", ");
+console.log(arrayOfStarWarsNames);
+
+// //////
+
+
+-- join method:
+
+ - joins array elements into a string using a specified delimiter
+
+   - ex: joining an array of numbers with a comma delimiter.
+
+
+-- code ex:
+
+arrayOfStarWarsNames.reverse();
+
+let reversedArrayOfStarWarsNames = arrayOfStarWarsNames.join(" | ");
+console.log(reversedArrayOfStarWarsNames);
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- reduce() and reduceRight() methods:
+
+ - used when we need to iterate through an array and return a single value.
+
+   - single value like: like a sum, product or concatenation of all elements.
+
+ - these methods work by applying a callback function to each array element,
+
+   - carrying forward the accumulated result.
+
+
+-- syntax ex:
+
+let value = array.reduce(function(accumulator, currentValue, index, array) {
+  // return the accumulated result
+}, initialValue);
+
+let value = array.reduce((accumulator, currentValue, index, array) => {
+  // return the accumulated result
+}, initialValue);
+
+
+-- syntax explained:
+
+ - accumulator : is the result of the previous function call,
+   
+   - equals initialValue the first iteration, if initialValue is provided.
+
+   - equals first array element on first iteration, if no initialValue.
+
+     - reduce(function, initialValue)
+
+
+ - currentValue : is the current array element being processed.
+
+ - index : is the index of the current array element being processed.
+
+ - array : is the array reduce was called upon.
+
+ - initialValue : value to use as first argument to first call of the callback.
+
+   - if no initialValue is provided, first array element is used.
+
+   - if array is empty and no initialValue is provided, TypeError is thrown.
+
+
+-- the way it works:
+
+ - as the function is applied, the result of the previous function call:
+ 
+   -  is passed as the first argument to the next function call.
+
+   - so the first argument is basically the accumulator that stores:
+
+     - the combined result of all previous executions and,
+
+     - at the end, it becomes the result of reduce.
+
+// //////
+
+
+-- code ex for Summing an Array:
+
+let expenses = [150, 215, 342, 69, 507, 120, 450];
+
+let totalExpenses = expenses.reduce((sum, expense) => sum + expense, 0);
+
+console.log(totalExpenses); // 2053
+
+
+-- code ex for Finding the Longest Name:
+
+let participants = ["John", "Alexander", "Jen", "Christopher", "Joe", "Ingonyama"];
+
+let longestName = participants.reduce((longest, name) => 
+  name.length > longest.length ? name : longest, "");
+
+console.log(longestName)
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Array.isArray() methods:
+
+ - checks if a value is an array.
+
+console.log(Array.isArray([1, 2, 3])); // true
+console.log(Array.isArray("Hello")); // false
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- ...thisArgs in most methods:
+
+ - available in most methods, from find, filter and map,
+
+   - but a notable exception being sort.
+
+ - the value for thisArgs becomes "this" for functions.
+
+ - for ex here we use a method of army object as a filter,
+
+   - and thisArg passes the context.
+
+-- code ex:
+
+let army = {
+  minAge: 18,
+  maxAge: 27,
+  canJoin(user) {
+    return user.age >= this.minAge && user.age < this.maxAge;
+  }
+};
+
+let armyUsers = [
+  { age: 16 },
+  { age: 20 },
+  { age: 23 },
+  { age: 30 }
+];
+
+// Using army.canJoin with army as thisArg (wrong way)
+// let soldiers = armyUsers.filter(army.canJoin, army);
+
+// Using army.canJoin with army as thisArg (correct way)
+let soldiers = armyUsers
+.filter(user => army.canJoin(user)); // thisArg is implicily bound to army object
+
+
+
+console.log(soldiers);
+// Output: [ { age: 20 }, { age: 23 } ]
+
+
+-- code explained:
+
+ - callback function context:
+
+   - the filter method loops through each element in users array,
+
+     - and calls army.canJoin for each user (element).
+
+   - normally, if you call a method like army.canJoin outside of its obect,
+   
+     -  that object being: (army), it loses its this binding.
+
+
+ - the role of thisArg
+
+   - when you pass army as the second argument to filter method (the thisArg):
+
+     - filter internally binds the this keyword in the callback function,
+
+       - callback function being (army.canJoin), to the army object.
+     
+     - so, inside the army.canJoin method, this refers to the army object.
+
+// //////
+
+
+ - how this affects logic:
+
+   - the canJoin method uses this.minAge and this.maxAge, 
+     
+     - which are properties of the army object.
+
+   - without the thisArg, this would not refer to army object,
+
+     - and the code would throw an error (or give incorect results).
+
+
+-- how to avoid any errors with thisArgs:
+
+ - instead of thisArg, you can use an arrow function to explicitly bind this.
+
+   - this will ensure the correct context binding.
+
+
+-- code ex:
+
+let soldiers = users.filter(user => army.canJoin(user));
+
+
+-- code explained:
+
+ - army.canJoin(user) is explicitly called, 
+
+   - and the context (this) inside canJoin still refers to army:
+
+     - this is becasue you are directly calling it as a method of army.
+
+  
+-- the incorrect way:
+
+let soldiers = armyUsers.filter(army.canJoin, army);
+
+
+-- code explained:
+
+ - when you pass army.canJoin directly as the callback to filter,
+
+   - (without wrapping it in an arrow function)
+
+   - its not immediately clear to javaScript what the value of this should be.
+
+
+ - the filter method detaches canJoin from the army object,
+
+   - and treats it as a standalone function.
+
+   - in javaScript when a method is detached from its object,
+
+     - (and called as a standalone function)
+
+       - it loses its original this context.
+

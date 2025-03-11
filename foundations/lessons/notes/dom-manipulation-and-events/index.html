@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js.js" defer></script>
+    <title>DOM Manipulation and Events</title>
+</head>
+<body>
+    
+    <h1>THE TITLE OF YOUR WEBPAGE</h1>
+    <div id="container"></div>
+
+    <p> Direct Function Calls:</p>
+    <div class="firstButtonContainer">
+        <!-- Events: Method 1 - Least ideal Ex: -->
+        <button onclick="alert('Hello World')">Click Me</button>   
+    
+        <!-- Method 2 - Less ideal Ex, but alil better (separation of concerns) -->
+        <button id="btn">Click Me</button>
+    
+        <!-- Method 3 - Preferred way of adding events -->
+        <button id="btn2">Click Me Too</button>
+    </div>
+
+    <p>Named Functions Calls:</p>
+    <div class="secondButtonContainer">
+
+        <!-- METHOD 1 - (still least ideal Ex.)-->
+        <button onclick="alertFunction()">CLICK ME BABY</button>
+
+        <!-- METHODS 2 & 3 - (best Ex.) -->
+        <button id="btn3">CLICK ME BABY</button>
+    </div>
+
+    <p>Event Targeting:</p>
+    <div class="thirdButtonContainer">
+        <button id="btn4">Target Me</button>
+    </div>
+
+    <p>Attaching Listeners to Groups of Nodes:</p>
+    <div class="thirdButtonContainer">
+        <button class="groupedBtns" id="one">Click Me</button>
+        <button class="groupedBtns" id="two">Click Me</button>
+        <button class="groupedBtns" id="three">Click Me</button>
+    </div>
+
+
+      
+</body>
+</html>

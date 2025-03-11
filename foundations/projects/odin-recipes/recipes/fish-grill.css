@@ -1,0 +1,69 @@
+* {
+    font-family: Tahoma, Verdana, sans-serif;
+}
+
+img {
+    width: 500px;
+    height: auto;
+    border-radius: 25px;
+    border-top: 20px solid rgb(240, 204, 210);
+    border-bottom: 20px solid rgb(240, 204, 210);
+}
+
+.image_container {
+    text-align: center;
+    
+}
+
+.highlighted_headings {
+    background-color: rgb(240, 204, 210);
+}
+
+h1, h2, h3 {
+    text-align: center;
+    width: 500px;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 25px;
+    color: white;
+    
+}
+
+p {
+    text-align: start;
+}
+
+.description_para {
+    text-align: center;
+
+}
+
+.notes_para {
+    padding: 10px 50px;
+}
+
+.instructions {
+    background-color: rgb(218, 218, 218);
+    padding: 20px;
+    border-radius: 25px;
+    border: 2px solid rgb(151, 63, 76);
+}
+
+.instructions h2 {
+    font-weight: 500;
+    text-align: start;
+    margin: 0;
+    color: rgb(151, 63, 76);
+}
+
+li {
+    padding-bottom: 10px;
+}
+
+a {
+    color: rgb(199, 132, 142);
+}
+
+a:visited {
+    color: rgb(151, 63, 76);
+}

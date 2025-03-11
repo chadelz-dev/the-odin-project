@@ -1,0 +1,419 @@
+
+Objects in JavaScript (javascript.info)
+
+Objects are collect…ions of key-value pairs used to store complex data and entities. 
+
+Unlike primitive types (e.g., numbers, strings), objects can hold multiple pieces of information.
+
+
+
+
+Creating Objects
+Objects can be created using:
+
+Object Constructor: let user = new Object();
+
+Object Literal: let user = {}; (preferred and more common)
+
+
+
+
+Adding Properties
+Properties are written as key: value pairs inside {}. 
+ Keys are strings (or symbols), and values can be any type. Example:
+
+let user = { name: "John", age: 30 };
+This creates an object with two properties: name and age.
+
+
+
+
+
+Accessing and Modifying Properties
+Use dot notation: user.name or user.age.
+Use square brackets for keys with special characters or spaces:
+
+
+user["likes birds"] = true;
+Add a property: user.isAdmin = true;
+
+
+Remove a property: delete user.age;
+
+
+
+
+
+Multiword Property Names
+Keys with spaces or special characters must be quoted:
+let user = { "likes birds": true };
+alert(user["likes birds"]); // true
+
+
+
+Computed Properties
+Square brackets allow dynamic property names:
+
+let fruit = "apple";
+let bag = { [fruit]: 5 }; // bag.apple = 5
+This is equivalent to:
+
+
+let bag = {};
+bag[fruit] = 5;
+Property Value Shorthand
+When key and variable names are the same, use shorthand:
+
+
+
+function makeUser(name, age) {
+  return { name, age }; // Same as name: name, age: age
+}
+
+
+Property Name Rules
+Keys can be any string or symbol. Reserved words (e.g., for, return) are allowed as property names:
+
+let obj = { for: 1, let: 2, return: 3 };
+Non-string keys (e.g., numbers) are automatically converted to strings:
+
+let obj = { 0: "test" };
+alert(obj[0]); // test
+
+
+
+
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- The for..in loop
+
+ - The for..in loop iterates over all enumerable properties of an object. 
+
+   - It is different from the for(;;) construct and is specifically designed for objects.
+
+
+--Syntax:
+
+for (let key in object) {
+  // Executes the body for each key in the object
+}
+
+-- code example:
+
+let yacht = {
+  name: "Nexus Balance 526",
+  length: 15.8,
+  sailArea: 140,
+  motor: "Yanmar 4JH4-HTE"
+};
+
+
+
+for (let key in yacht) {
+  console.log(key);
+}
+
+
+-- code explaiend:
+
+ - Key Details:
+
+ - Dynamic Variable Name: The looping variable 
+   - (e.g., key) can have any name. Common alternatives include prop or attribute.
+
+ - Access Values: Use object[key] to access the value corresponding to the current key.
+
+
+-- Object Property Order in for..in
+
+ - Rule for Property Order:
+   - Integer-like keys: Sorted in ascending order.
+   - Non-integer keys: Iterated in the order of their creation.
+
+
+
+ -The for..in loop iterates over all the enumerable properties of the object yacht.
+
+ - On each iteration:
+   - The key variable holds the name of the current property (as a string).
+
+   - For example, the first iteration assigns "name" to key, 
+                   the second iteration assigns "length", and so on.
+
+
+-- Accessing the property value
+
+console.log(yacht[key]);
+
+ - yacht[key] uses bracket notation to access the value of the property whose name is stored in key.
+
+ - For example:
+ - In the first iteration, key is "name". So yacht[key] becomes yacht["name"], 
+    which accesses the value "Nexus Balance 526".
+
+ - In the second iteration, key is "length". So yacht[key] becomes yacht["length"], 
+    which accesses the value 15.8.
+
+
+
+-- What Happens When you loop with (for...in):
+
+ - On the first iteration:
+   - key is "name".
+   - yacht[key] is yacht["name"], which retrieves "Nexus Balance 526".
+
+ - On the second iteration:
+   - key is "length".
+   - yacht[key] is yacht["length"], which retrieves 15.8.
+ 
+ - And so on for the rest of the properties.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+// Ex. Interger-like Keys Sorting:
+
+let phoneCodesWrong = {
+  49: "Germany",
+  41: "Switzerland",
+  44: "Great Britain",
+  // ..,
+  1: "USA",
+};
+
+
+for (let code in phoneCodesWrong) {
+  console.log(`Interating through phoneCodesWrong: ${code}`); // 1, 41, 44, 49
+}
+
+
+
+-- Why this happens: (returns 1, 41, 44, 49)
+
+ - The keys "49", "41", etc., are integer-like
+
+   - (strings that can be converted to integers without change). 
+   - These are automatically sorted in ascending order.
+
+-- What are Integer-like Properties?
+
+ - An integer-like property is:
+   A string that can be converted to an integer without change.
+
+ - Examples:
+
+   - "49" is integer-like because Number("49") is 49, and converting back gives "49".
+
+   - "+49" or "1.2" are not integer-like:
+
+
+// //////
+
+
+-- Fixing Integer-like Sorting with Non-integer Keys:
+
+let phoneCodesFixed = {
+  "+49": "Germany",
+  "+41": "Switzerland",
+  "+44": "Great Britain",
+  "+1": "USA",
+};
+
+for (let code in phoneCodesFixed) {
+  console.log(`Interating through phoneCodesFixed: ${code}`); // +49, +41, +44, +1
+  console.log(+code);
+}
+
+-- code explained:
+
+ - Adding a "+" sign and "" to the keys makes them non-integer-like. (string like)
+
+   - This prevents automatic sorting.  
+   - (they are now strings that don’t convert directly to integers without change).
+
+
+-- What the +code Does in (console.log(+code);)
+
+ - The unary + operator attempts to convert a value to a number. 
+
+   - If the value is not directly numeric, 
+      JavaScript will try to parse it into a number. 
+
+   - If the value is a string that begins with a + (like "+49"), 
+      the + operator will interpret it as a numeric string and return it as a number.
+
+ - The for..in loop respects their creation order.
+
+// //////
+
+
+-- take aways:
+
+ - for..in iterates over all enumerable properties of an object.
+ 
+ - Integer-like keys are sorted, while non-integer keys follow their creation order.
+
+ - To ensure specific ordering, avoid using integer-like keys,
+ 
+   - or modify them into a string (e.g., prefix with +).
+
+   - Use object[key] to access the value corresponding to each property.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+Summary 
+
+Objects store key-value pairs (properties).
+
+Keys must be strings or symbols.
+Values can be any type.
+Accessing Properties:
+
+Dot notation: obj.property
+Bracket notation: obj["property"] (useful for dynamic keys).
+Key Operations:
+
+Delete a property: delete obj.prop
+Check property existence: "key" in obj
+Iterate over properties: for (let key in obj)
+Plain Objects are the basic type of object in JavaScript.
+Other specialized objects include:
+
+Array for ordered collections.
+Date for date and time.
+Error for error information.
+
+// ////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Difference between Objects and Primitives (Odin Project Section)
+
+ - Main Differences
+
+   - primitives: (strings, numbers, etc) hold single values.
+
+   - objects: (arrays, functions, etc) store collections of data.
+      (or more complex entities).
+
+
+-- Primitive Variables (By Value)
+
+ - when assigning a primitive value to a new variable,
+
+   - the new variable gets a copy of the original value.
+   - Changes to the new variable do not affect the original value.
+
+let originalData = 42;
+let copiedData = originalData; // copiedData is a copy of data
+
+copiedData = 99; // changing copiedData does not affect originalData
+
+console.log(originalData); // Outputs: 42
+console.log(copiedData);   // Outputs: 99
+
+
+-- Object Variables (By Reference)
+
+ - when assigning an object to a new variable,
+
+   - the new variable stores a reference to the same object in memory.
+   - changes to the new variable affect the original object.
+
+const originalObj = { data: 42 };
+const copiedObj = originalObj; // copiedObj is a reference to the same object
+
+copiedObj.data = 99; // changing copiedObj affects the original object
+
+console.log(originalObj.data); // Outputs: 99
+console.log(copiedObj.data);   // Outputs: 99
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Same Behavior for Arrays and Functions
+
+ - this happens when we pass arguments into a function too, here is an ex:
+
+ function increaseCounterObject(objectCounter) {
+  objectCounter.counter += 1;
+ }
+
+ function increaseCounterPrimitives(primitiveCounter) {
+  primitiveCounter += 1;
+ }
+
+ const object = { counter: 0 };
+ let primitive = 0;
+
+ increaseCounterObject(object);
+ increaseCounterPrimitives(primitive);
+
+console.log(object.counter); // Outputs: 1
+console.log(primitive);      // Outputs: 0
+
+
+// //////
+
+
+-- Reassigning Object Data Type Variables
+
+ - reassigning a variable does not change what other variables refer to.
+
+   - it only changes what the variable being reassigned refers to.
+
+
+   - this is because:
+   
+     - objects are stored by a reference in memory: 
+       
+       - and not by value like primitives.
+
+     - so when we reassign a variable:
+       
+       - we are changing the reference in memory, not the object itself.
+
+       - the original object continues to exist in memory,
+
+         - and any other variables that refer to it will still point to it.
+
+
+-- code:
+
+
+let animal = { species: "dog" };
+let dog = animal;  // dog and animal refer to the same object
+
+animal = { species: "cat" };  // reassigning animal to a new object
+console.log(animal);  // { species: "cat" }
+console.log(dog);     // { species: "dog" }
+
+
+-- explained from the code 
+
+ - when we assign one variable to another (let dog = animal),
+
+   - both variables dog and animal point to the same object in memory:
+   
+     - animal = {species: "dog"},
+
+
+ - when we reassign one variable (animal = {species: "cat"}),
+
+   - only that variable (animal) changes its reference to a new object.
+
+   - the other variable (dog) still points to the original object.
+
+// //////
+
+
+-- Change the content of the object itself:
+
+ - if you wanted dog to reflect the change made to animal you would:
+
+   - modify the object's properties, without reassigning the variable
+

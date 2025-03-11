@@ -1,0 +1,593 @@
+
+-- DOM Manipulation and Events
+
+ - general overview of topics covered:
+
+   - explain what the DOM is.
+   - explain the difference between a 'node' and an 'element'.
+   - explain how to target nodes with 'selectors'.
+   - explain basic methods for finding, adding, removing, altering DOM nodes.
+   - explain tge difference between a 'NodeList' and an 'array of nodes'.
+   - explain what bubbling is and how it works.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Document Object Model (DOM)
+
+ - the dom is a tree-like structure that represents the content of a webpage.
+
+ - a tree of 'nodes' with different relationships depending on:
+    how they are arranged in the HTML document.
+
+ - theres many different types of nodes but here we will focus on element nodes.
+
+   - element nodes are primarily used for manipulating the DOM.
+
+   - they represent the HTML elements on a webpage.
+
+
+-- code ex:
+
+<div id="container">
+        <div class="display"></div>
+        <div class="controls"></div>
+</div>
+
+
+-- code explained:
+
+ - <div id="container"></div>
+   - is the parent element.
+
+
+ - <div class="display"></div>
+   - is a child of the container element.
+   - it is also a sibling of the controls element.
+
+
+ - <div class="controls"></div>
+   - is a child of the container element.
+   - it is also a sibling of the display element. 
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Targeting Nodes with Selectors
+
+ - when working with the DOM, use 'selectors' to target specific nodes.
+
+ - you can use a combination of CSS-style selectors and relationship
+    properties to target a specific node.
+
+
+-- CSS-Style Selectors 
+
+ - from the above ex. html code, you could use any of the following,
+
+ - for referring to  <div class="display"></div> :
+
+   - div.display
+   - .display 
+   - #container 
+   - #container > .display 
+   - div#container > div.display 
+
+
+
+
+-- Relational Selectors
+
+ - you can use relational selectors to target nodes based on their
+   relationship to other nodes within the tree.
+
+   - variableName.firstElemenChild;       // selects first child element
+   - variableName.lastElementChild;       // selects last child element
+   - variableName.nextElementSibling;     // selects next sibling element
+   - variableName.previousElementSibling; // selects previous sibling element
+   - variableName.parentNode;             // selects parent element of a node.
+   - variableName.childNodes;             // selects all child nodes of a node.
+   - variableName.children;               // selects all child elements of a node.
+
+
+-- few code exs:
+
+// select the #container div 
+const container = document.querySelector("#container");
+
+// select the first child of #container => (.display)
+const display = container.firstElementChild;
+
+console.log(display);  // <div class="display"></div>
+   
+
+// select the .controls div
+const controls = document.querySelector(".controls");
+
+// select the prior sibling => (.display)
+const display = controls.previousElementSibling;
+
+console.log(display); // <div class="display"></div>
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- DOM methods
+
+ - when html code is parsed by a web browser, it is converted to the DOM.
+
+ - one of the Primary differences is that these nodes are JavaScript objects.
+  
+   - they have many methods & properties that can be used to manipulate the DOM.
+
+   - these properties & methods are primary tools in manipulating the DOM.
+
+  
+ - we will cover Query Selectors being the most common methods, 
+
+   - there are several other more specific queries that can be used.
+
+   - they offer marginal performance benefits at best.
+
+  
+-- Query Selectors
+
+ - elementName.querySelector(selector); 
+
+   - returns a reference to the first match of selector.
+
+
+ - elementName.querySelectorAll(selector);
+
+   - returns a NodeList containing all matches of selector.
+
+   - NB for NodeList **
+
+     - NodeList is a collection of nodes, but it is not an array.
+
+     - it looks like an array, but it is missing some array methods.
+
+     - One Solution for if a problem arises is:
+
+       - convert NodeList to an array using Array.from() method.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Element Creation
+
+- document.createElement(tagName, [options]) 
+
+   - creates a new element of tag type tagName.
+
+   - [options] is an optional parameter that can be used to set attributes.
+
+
+  - this function does NOT put your new element into the DOM.
+
+    - it creates it in memory so that you can:
+
+    - manipulate the element by adding styles, classes, ids, text etc,
+       before you place it into the (page).
+     
+    - placing elements into the dom will be the next method.
+
+
+ - for now, here is the code example of how to create the element.
+
+-- code ex:
+
+const div = document.createElement("div");
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Append Elements
+
+- parentNode.appendChild(childNode)
+
+  - appends (adds) childNode as the last child of parentNode.
+
+
+- parentNode.insertBefore(newNode, referenceNode)
+
+  - inserts newNode into parentNode before referenceNode.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Remove Elements
+
+- parentNode.removeChild(child)
+
+  - removes child from parentNode on the DOM and returns the removed node.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Altering Elements
+
+ - when you have a refererence to a node,
+
+   - you can use that reference to change the elements own properties.
+
+   - this allows you to do many useful alterations, like:
+
+     - adding, removing or altering attributes, changing classes, 
+
+     - adding inline style information, and more.
+
+
+-- code exs:
+
+// creates a new div referenced in the variable 'div'
+const div = document.createElement("div");
+
+
+// adding inline styles:
+
+// adds the indicated style rule to the element in the div variable
+div.style.color = "blue";
+
+// adds several style rules
+div.style.cssText = "color: blue; background: white;";
+
+// adds several style rules
+div.setAttribute("style", "color: blue; background: white;");
+
+// //////
+
+
+-- Accessing CSS properties like background-color with js,
+
+ - you will need to either use: 
+   
+   - camelCase with dot notation or use bracket notation.
+
+     - kebab-case will not work with dot notation.
+
+     - ex: div.style.background-color; // doesn't work
+
+     - ex: div.style.backgroundColor; // works
+
+   - when using bracket notation, you can use either:
+
+     - camelCase or kebab-case, but the property name must be a string.
+
+     - ex: div.style["background-color"]; // works
+
+     - ex: div.style["backgroundColor"]; // works
+
+
+-- code ex:
+
+// dot notation with kebab case: doesn't work 
+div.style.background-color;
+
+// dot notation with camelCase: works, accesses the div's background-color style
+div.style.backgroundColor;
+
+// bracket notation with kebab-case: also works
+div.style["background-color"];
+
+// bracket notation with camelCase: also works
+div.style["backgroundColor"];
+
+// //////
+
+
+-- Editing Attributes
+
+ - see mdn section on HTML Attributes for more info on available attributes
+
+-- code exs:
+
+// if id exists, update it to 'theDiv', else create an id with value "theDiv"
+div.setAttribute("id", "theDiv");
+
+// returns value of specified attribute, in this case "theDiv"
+div.getAttribute("id");
+
+// removes specified attribute
+div.removeAttribute("id");
+
+
+
+// //////
+
+
+-- Working with Classes:
+
+ - it is often standard (and cleaner) to toggle a CSS style, 
+
+   - rather than adding and removing inline CSS styling.
+
+
+-- code exs:
+
+// adds class "new" to your new div
+div.classList.add("new");
+
+// removes "new" class from div
+div.classList.remove("new");
+
+//  toggle if div doesn't have class "active" then add it, or if it does, then remove it
+div.classList.toggle("active");
+
+
+// //////
+
+
+-- Adding Text Content:
+
+// creates a text node containing "Hello World!" and inserts it in div
+div.textContent = "Hello World!";
+
+// //////
+
+
+-- Adding HTML content
+
+- Note that using textContent is preferred over innerHTML, for adding text,
+
+   - as innerHTML should be used sparingly to avoid potential security risks.
+
+
+-- code exs:
+
+// renders the HTML inside div using innerHTML which isn't best:
+div.innerHTML = "<span>Hello World!</span>";
+
+// the preferred way of adding text to an element:
+div.textContent = "This is the glorious text-content!";
+
+
+
+
+// ////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- index.html Page:
+
+-- code:
+
+<body>
+  <h1>THE TITLE OF YOUR WEBPAGE</h1>
+  <div id="container"></div>
+</body>
+
+
+
+
+-- js.js Page:
+
+-- code:
+
+// your JavaScript file
+const container = document.querySelector("#container");
+
+const content = document.createElement("div");
+content.classList.add("content");
+content.textContent = "This is the glorious text-content!";
+
+container.appendChild(content);
+
+
+// //////
+
+-- code explained:
+
+const container = document.querySelector("#container");
+ - first we get a reference to the container div that already exists in the HTML
+
+
+const content = document.createElement("div")
+ - then we create a new div element and store it in the variable content
+
+
+content.classList.add("content");
+ - we give it a class of "content"
+
+
+content.textContent = "This is the glorious text-content!";
+ - we add some text to the content div
+
+
+container.appendChild(content);
+ - finally we append the content div to the container div.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- NB Note for the DOM vs your HTML:
+
+-- html:
+
+ - the html file is not altered by the JavaScript, it will still look the same:
+
+<body>
+    <h1>THE TITLE OF YOUR WEBPAGE</h1>
+    <div id="container"></div>
+</body> 
+
+
+-- DOM:
+
+ - the JavaScript changes what the browser renders
+
+ - the DOM however, is very much altered:
+
+<body>
+  <h1>THE TITLE OF YOUR WEBPAGE</h1>
+  <div id="container">
+    <div class="content">This is the glorious text-content!</div>
+  </div>
+</body>
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Events
+
+ - Events are actions or occurrences that happen on the webpage.
+
+   - such as mouse clicks, or key presses.
+
+   - there are 3 primary ways to go about this:
+
+     - 1. specify function attributes directly on your HTML elements.
+
+     - 2. set properties in the form of on<eventType> such as onclick or onmousedown
+
+    - 3. use the addEventListener() method to the DOM nodes in your JS.
+
+
+ - Event Listeners are the preferred method, but will see the others in use.
+
+ - we will create 3 buttons that all alert Hello World when clicked.
+
+    - using all 3 different methods.
+
+
+-- Method 1: 
+
+<button onclick="alert('Hello World')">Click Me</button>
+
+
+ - this solution is less than ideal because we cluitter our HTML with js.
+
+   - we can only set one "onclick" function for each HTML element.
+
+   - so we are unable to run multiple separate functions.
+
+
+
+-- Method 2:
+
+<!-- the HTML file -->
+<button id="btn">Click Me</button>
+
+// the JavaScript file
+const btn = document.querySelector("#btn");
+btn.onclick = () => alert("Hello World");
+
+
+ - this solution is a little better 
+
+   - the JS has been put into its own file, but we still have a problem,
+
+   - the DOM element only having one "onclick" function.
+
+
+
+-- Method 3:
+
+<!-- the HTML file -->
+<button id="btn">Click Me Too</button>
+
+// the JavaScript file
+const btn = document.querySelector("#btn");
+btn.addEventListener("click", () => {
+  alert("Hello World");
+});
+
+
+ - this solution is the best,
+
+ - separation of concerns is maintained,
+
+ - and we also allow multiple event listeners, if the need arises.
+
+   - method 3 is much more flexible and powerful,
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Named Functions (with prev examples)
+
+ - named functions can clean up your code and is a really good idea if:
+ 
+   - it is a function that you are going to call in multiple places
+
+
+-- Method 1:
+
+<!-- the HTML file -->
+<!-- METHOD 1 -->
+<button onclick="alertFunction()">CLICK ME BABY</button>
+
+// the JavaScript file
+// METHOD 1
+function alertFunction() {
+  alert("YAY! YOU DID IT!");
+}
+
+
+
+-- Method 2:
+
+<!-- the HTML file -->
+<button id="btn">CLICK ME BABY</button>
+
+// the JavaScript file
+function alertFunction() {
+  alert("YAY! YOU DID IT!");
+}
+const btn = document.querySelector("#btn");
+
+btn.onclick = alertFunction;
+
+
+
+-- Method 3:
+
+<!-- the HTML file -->
+<button id="btn">CLICK ME BABY</button>
+
+// the JavaScript file
+function alertFunction() {
+  alert("YAY! YOU DID IT!");
+}
+
+const btn = document.querySelector("#btn");
+
+btn.addEventListener("click", alertFunction);
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Event Objects
+
+btn.addEventListener("click", function (e) {
+  console.log(e);
+});
+
+
+ - allows us to access more info about the event by:
+
+   - passing a parameter to the function that we are calling, an ex:
+
+
+ - the "e" parameter in that callback function contains an object,
+
+   - this object references the event itself.
+
+   - within this object you have access to mamy useful properties and methods.
+
+     - such as, which mouse button or key was pressed, 
+     
+     - or info about the events target (the DOM node that was clicked)
+
+
+-- Note 
+
+ - when passing alertFunction or function (e){..} as argument to addEventListener
+
+   - we call this a "callback" and a callback is simply:
+
+   - a function that is passed into another function as an argument.
+
+
+
