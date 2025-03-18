@@ -1,0 +1,175 @@
+/* 
+
+- the amount of columns or rows depends on how many values you have.
+
+  - grid-template-columns: 50px 50px;
+
+    - will create a grid with 2 columns
+    - each column will have 50px width
+
+  - grid-template-rows: 50px 50px;
+
+    - will create a grid with 2 rows
+    - each row will have 50px height
+
+
+- the value will determine the size of the grid,
+
+  - 50px columns and/or rows will create exactly that, 50px sized grids
+
+  - 100px will create a 100px sized grid and so on and so forth
+
+  - mixed values like 50px and 100px will create different sized columns/rows
+
+
+- 
+
+*/
+
+/* Explicit Rows */
+
+.container-one {
+  display: grid;
+  grid-template-columns: 50px 50px;
+  grid-template-rows: 50px 50px;
+  border: 1px solid blue;
+  width: 25%;
+}
+
+.container-one > div {
+  border: 1px solid blue;
+}
+
+.container-two {
+  display: grid;
+  /* before / is rows and after / is columns */
+  grid-template: 75px 50px / 75px 50px 50px;
+  border: 1px solid red;
+  width: 50%;
+}
+
+.container-two > div {
+  border: 1px solid red;
+}
+
+/* Implicit Rows */
+
+.container-three {
+  display: grid;
+  grid-template: 50px / 50px;
+  grid-auto-rows: 75px;
+  border: 1px solid green;
+  width: 75%;
+}
+
+.container-three > div {
+  border: 1px solid green;
+}
+
+.container-four {
+  display: grid;
+  grid-template-columns: 150px;
+  grid-template-rows: 50px;
+  grid-auto-columns: 75px;
+  grid-auto-flow: column;
+  border: 1px solid orange;
+  height: 60px;
+}
+
+.container-four > div {
+  border: 1px solid orange;
+}
+
+.container-four > div:nth-child(1) {
+  border: 1px solid blue;
+}
+
+/*
+
+-- explicit grid
+
+ - defined by rows and columns using
+
+   - grid-template-rows and grid-template-columns:
+
+     - grid-template-columns: 50px 50px;
+     - grid-template-rows: 50px 50px;
+
+   - this will make 2 x 2 grid holding only 4 items.
+
+
+ - when you add another div item, CSS grid automatically adds a new row
+
+   - this is the implicit grid.
+
+   - you can control the size of the new row by using grid-auto-rows
+
+
+ - default extra items are placed in new rows (implicit rows)
+  
+   - you can change this to add columns instead by using "grid-auto-flow: column"
+
+   - you can set the size of the new column by using grid-auto-columns
+
+*/
+
+/* Column and Row Gaps */
+
+.container-five {
+  display: grid;
+  /* before / is rows and after / is columns */
+  grid-template: 75px 50px / 50px 75px 50px;
+  border: 1px solid blue;
+  width: 50%;
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 15px;
+}
+
+.container-five > div {
+  border: 1px solid blue;
+}
+
+/* Shorthand Gap */
+
+.container-six {
+  display: grid;
+  /* before / is rows and after / is columns */
+  grid-template: 75px 50px / 50px 75px 50px;
+  border: 1px solid red;
+  width: 75%;
+  gap: 10px 100px;
+  padding: 15px;
+}
+
+.container-six > div {
+  border: 1px solid red;
+}
+
+/*
+
+-- Grid Gap
+
+ - used to add space between grid items
+
+
+-- Column Gap
+
+ - used to add space between columns
+   - grid-column-gap: 10px;
+
+
+-- Row Gap
+
+ - used to add space between rows
+   - grid-row-gap: 10px;
+
+
+-- Shorthand Gap
+
+ - used to add space between grid items
+   - gap: 10px 100px;
+
+*/
+
+/**/

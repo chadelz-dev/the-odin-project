@@ -1,0 +1,295 @@
+/*
+
+-- Some Terminology
+
+ - using the below 3x3 example "container-one"
+ 
+ - Lines 
+
+   - are the horizontal and vertical lines between tracks, created implicitly
+  
+   - every track has a start and end line.
+
+     - lines are numbered from left to right and top to bottom, starting at 1
+
+     - so our 3x3 grid has 
+
+       - vertical lines for columns ranging from 1 to 4
+       - horizontal lines for rows ranging from 1 to 4
+
+   - grid lines are what we use to position grid items.
+   
+
+
+ - Tracks
+ 
+   - are single rows and columns 
+     
+     - eg row 1 is the track between line 1 and 2 vertically (A, B, C)
+
+     - column 3 is the track between line 3 and 4 horizontally (C, F, I)
+
+
+
+ - Cells 
+
+   - space in a grid shared by a single row track and a single column track
+
+   - think of a grid cell like a cell in a spreadsheet,
+     - a space defined by a row and column coordinate
+
+   - by default each child element in a grid container will occupy one cell
+
+   - we have 9 cells in our 3x3 grid. each automatically positioned with
+     - a child element inside.
+
+
+   - the element marked with the Letter "A" is occupying a cell that:
+   
+     - lies in row track 1 (between row grid lines 1 and 2)
+
+     - and  column track 1 (between column grid lines 1 and 2)
+
+
+   - the element marked with the Letter "H" is occupying a cell that:
+
+     - is in a cell at row track 3 (between row grid lines 3 and 4)
+
+     - and column track 2 (between column grid lines 2 and 3)
+
+
+*/
+
+/* Basic Positioning a 3x3 Grid */
+
+.container-one {
+  display: grid;
+  grid-template-rows: 50px 50px 50px;
+  grid-template-columns: 50px 50px 50px;
+}
+
+.item {
+  background-color: orange;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.first-row {
+  background-color: pink;
+}
+
+.last-column {
+  background-color: lightblue;
+}
+
+/*
+
+-- cod explained:
+
+ - creates a 3x3 grid, with 3 rows and 3 columns
+
+   - each item is 50px wide/tall 
+   - using grid-template-rows and grid-template-columns
+
+ - items A, B, C are in the first row with their own colour.
+
+ - items C, F, I are in the last column with their own colour.
+
+ - each div fills one cell in order.
+
+*/
+
+/* Option 1 - Empty 5x5 Grid */
+
+.container-two {
+  display: inline-grid;
+  grid-template: 80px 80px 80px 80px 80px / 80px 80px 80px 80px 80px;
+  background-color: lightblue;
+}
+
+/* Filling up the 5x5 Grid */
+
+.room {
+  border: 1px solid;
+  font-size: 50%;
+  text-align: center;
+}
+
+#living-room {
+  grid-area: 1 / 1 / 3 / 6;
+}
+
+#kitchen {
+  grid-row: 3 / 6;
+  grid-column: 4 / 6;
+}
+
+#bedroom {
+  grid-row-end: 5;
+  grid-row-start: 3;
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+#bathroom {
+  grid-row-start: 3;
+  grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#closet {
+  grid-row: 5 / 6;
+  grid-column: 2 / 4;
+}
+
+/* Option 2 - Visual Layout of the Grid in Words */
+
+.container-three {
+  display: inline-grid;
+  grid-template: 80px 80px 80px 80px 80px / 80px 80px 80px 80px 80px;
+  background-color: lightblue;
+  grid-template-areas:
+    "living-room living-room living-room living-room living-room"
+    "living-room living-room living-room living-room living-room"
+    "bedroom bedroom bathroom kitchen kitchen"
+    "bedroom bedroom bathroom kitchen kitchen"
+    "closet closet . . .";
+}
+
+.room2 {
+  border: 1px solid;
+  font-size: 50%;
+  text-align: center;
+}
+
+/* Give each item on the grid a unique name using grid-area */
+
+#living-room2 {
+  grid-area: living-room;
+}
+
+#kitchen2 {
+  grid-area: kitchen;
+}
+
+#bedroom2 {
+  grid-area: bedroom;
+}
+
+#bathroom2 {
+  grid-area: bathroom;
+}
+
+#closet2 {
+  grid-area: closet;
+}
+
+/*
+
+-- code explained: 
+
+
+-- Option 1 - Empty 5x5 Grid Setup
+
+ - sets up a 5x5 grid with 5 rows (before the /) and 5 columns (after the /)
+
+ - display: inline-grid makes the grid inline, so it will flow horizontally
+
+   - not full width like a block element
+
+ - background colour is to help visualise the grid
+
+
+
+-- Filling up the 5x5 Grid
+
+ - grid-column-start 
+  
+   - sets the start column of the grid
+
+ - grid-column-end
+ 
+   - sets the end column of the grid
+ 
+
+ - grid-row-start
+ 
+   - sets the start row of the grid
+ 
+ - grid-row-end
+ 
+   - sets the end row of the grid
+
+
+ - grid-column shorthand
+  
+   - sets the start and end column of the grid
+
+ - grid-row shorthand
+  
+   - sets the start and end row of the grid
+
+
+ - grid-area shorthand
+
+   - sets the start and end for rows and columns in a grid
+
+   - to further explain this, we will use the #living-room div as an example
+
+     grid-area: 1 / 1 / 3 / 6;
+
+     - this sets rows and columns for the div
+
+       - the first value is the start row
+       - the second value is the start column
+
+       - the third value is the end row
+       - the fourth value is the end column
+
+         - using regular row and column, start and end it would look like this:
+  
+           grid-row-start: 1;
+           grid-row-end: 3;
+           grid-column-end: 6;
+           grid-column-start: 1;
+
+
+
+
+-- Option 2 - Visual Layout of the Grid in Words
+
+ - works the same as option 1 but instead of using grid-template shorthand
+
+   - we use grid-template-areas
+
+
+ - this is a visual representation of the grid
+
+   - the grid-template-areas property is used to define the layout of the grid
+
+   - each item is 80px wide/tall 
+
+   - using grid-template-rows and grid-template-columns
+     
+
+ - grid-template: 80px 80px 80px 80px 80px / 80px 80px 80px 80px 80px;
+
+   - defines the grid layout and size of the cells in the grid
+
+ - to define what goes into those cells, we use grid-template-areas
+
+    grid-template-areas:
+      "living-room living-room living-room living-room living-room"
+      "living-room living-room living-room living-room living-room"
+      "bedroom bedroom bathroom kitchen kitchen"
+      "bedroom bedroom bathroom kitchen kitchen"
+      "closet closet . . .";
+
+    - living-room,
+
+
+
+   
+
+ */
