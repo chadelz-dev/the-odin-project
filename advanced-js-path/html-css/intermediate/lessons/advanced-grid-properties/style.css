@@ -1,0 +1,533 @@
+/* Static Grid with Hardcoded Values */
+
+body {
+  height: 200vh;
+  overflow: scroll;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-rows: 100px 100px;
+  grid-template-columns: 100px 100px 100px 100px 100px;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid grey;
+  background-color: lightblue;
+  resize: both;
+  overflow: auto;
+  margin-bottom: 20px;
+}
+
+.grid-item {
+  background-color: #444;
+  text-align: center;
+  color: #ddd;
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  padding: 6px;
+}
+
+.grid-item p {
+  margin: 6px auto 12px;
+}
+
+.grid-item img {
+  height: 30px;
+}
+
+/* Dynamic Grid with Variable Values */
+
+.grid-container-two {
+  resize: both;
+  overflow: auto;
+  display: grid;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid grey;
+  background-color: lightcoral;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 2fr) repeat(3, 1fr);
+  margin-bottom: 20px;
+}
+
+.grid-item-two {
+  background-color: #444;
+  text-align: center;
+  color: #ddd;
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  padding: 6px;
+}
+
+.grid-item-two p {
+  margin: 6px auto 12px;
+}
+
+.grid-item-two img {
+  height: 30px;
+}
+
+/* Min() and Max() Function Values */
+
+.grid-container-three {
+  resize: both;
+  overflow: auto;
+  display: grid;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid grey;
+  background-color: lightgreen;
+  grid-template-rows: repeat(2, min(200px, 50%));
+  grid-template-columns: repeat(5, max(120px, 15%));
+  margin-bottom: 20px;
+}
+
+.grid-item-three {
+  background-color: #444;
+  text-align: center;
+  color: #ddd;
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  padding: 6px;
+}
+
+.grid-item-three p {
+  margin: 6px auto 12px;
+}
+
+.grid-item-three img {
+  height: 30px;
+}
+
+/* MinMax() Function Values */
+
+.grid-container-four {
+  resize: both;
+  overflow: auto;
+  display: grid;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid grey;
+  background-color: lightsalmon;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(5, minmax(150px, 200px));
+  margin-bottom: 20px;
+}
+
+.grid-item-four {
+  background-color: #444;
+  text-align: center;
+  color: #ddd;
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  padding: 6px;
+}
+
+.grid-item-four p {
+  margin: 6px auto 12px;
+}
+
+.grid-item-four img {
+  height: 30px;
+}
+
+/* Clamp() Function Values */
+
+.grid-container-five {
+  resize: both;
+  overflow: auto;
+  display: grid;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid grey;
+  background-color: lightseagreen;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(5, clamp(150px, 20%, 200px));
+  margin-bottom: 20px;
+}
+
+.grid-item-five {
+  background-color: #444;
+  text-align: center;
+  color: #ddd;
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  padding: 6px;
+}
+
+.grid-item-five p {
+  margin: 6px auto 12px;
+}
+
+.grid-item-five img {
+  height: 30px;
+}
+
+/* auto-fit and auto-fill values */
+
+/* auto-fit */
+.grid-container-six {
+  resize: both;
+  overflow: auto;
+  display: grid;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid grey;
+  background-color: lightpink;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  margin-bottom: 20px;
+}
+
+.grid-item-six {
+  background-color: #444;
+  text-align: center;
+  color: #ddd;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  padding: 12px;
+}
+
+.grid-item-six p {
+  margin: 12px auto 24px;
+}
+
+.grid-item-six img {
+  height: 60px;
+}
+
+/* auto-fill */
+.grid-container-seven {
+  resize: both;
+  overflow: auto;
+  display: grid;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid grey;
+  background-color: lightsteelblue;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  margin-bottom: 20px;
+}
+
+.grid-item-seven {
+  background-color: #444;
+  text-align: center;
+  color: #ddd;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  padding: 12px;
+}
+
+.grid-item-seven p {
+  margin: 12px auto 24px;
+}
+
+.grid-item-seven img {
+  height: 60px;
+}
+
+/*
+
+-- Repeat() Function
+
+ - defines a number of rows or columns and the size of them
+
+   - without having to manually specify the number of rows or columns
+
+ 
+ - for example:
+
+   grid-template-rows: repeat(2, 150px);
+   grid-template-columns: repeat(5, 150px);
+
+   - both replace and do the same thing as  the first example above which uses:
+
+     grid-template-rows: 150px 150px;
+     grid-template-columns: 150px 150px 150px 150px 150px;
+
+
+ - You can set different values for a row or column
+
+   - you do this by repeating the use of repeat() with different values
+
+     - for example:
+
+       grid-template-columns: repeat(2, 2fr) repeat(3, 1fr);
+
+       - this creates a grid with two columns with a value of 2fr
+       - and another three columns with a value of 1fr
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Fractional Units
+
+ - for dynamic grids, you can use fractional units
+
+   - dynamic in this context means "flexible" or "responsive in some way".
+
+   - the opposite to this is static, or fixed at a certain defined values,
+
+     - like 150px which we used in the setup for this sample grid above.
+
+
+ - fractional units are the most basic way to make grid items dynamic
+ 
+   - also known and used as "fr"
+
+
+ - the fr unit distributes whatever remaining space is left in the grid.
+
+   - for example: 
+
+   -  if we have a four column grid with a total width of 400px,
+
+      - and four grid items each on a column track assigned 1fr as their size::after
+
+        - all of the grid items should be given one fraction of the 400px space
+
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Minimum and Maximum Track Sizes: min() and max()
+
+ - allows you to control how small or large content is.
+
+-- code ex:
+
+   grid-template-rows: repeat(2, min(200px, 50%));
+   grid-template-columns: repeat(5, max(120px, 15%));
+
+   - min(200px, 50%) sets the row height to the smaller of 200px 
+   
+     - or 50% of container height and caps the row height at 200px.
+
+   - max(120px, 15) sets the  column width to the larger of 120px
+
+     - or 15% of container height, caps
+
+
+
+
+-- MinMax() Function
+
+ - minmax() is specifically used with Grid.
+
+   - it can only be used with the following::after
+
+    - grid-template-rows
+    - grid-template-columns
+    - grid-auto-rows
+    - grid-auto-columns
+
+ 
+ - only takes two 2 functions
+
+   - 1. the minimum size the grid track can be
+   - 2. the maximum size the grid track can be
+
+
+ - unlike min() and max(), it can make sense to use static values for both args
+
+   - ex of the grid we've been using written with minmax() with static values
+
+     grid-template-rows: repeat(2, 1fr);
+     grid-template-columns: repeat(5, minmax(150px, 200px));
+
+     - grid-template-column set with minmax() values::after
+
+       - each grid items width will grow and shrink with the grid container
+          as it resizes horizontally
+       
+       - however as the grid shrinks, the column tracks will stop shrinking
+          at 150px 
+
+       - as the grid grows, the column tracks stop growing at 200px 
+
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Clamp() Function
+
+ - unlike minmax(), clamp() is a CSS function that can be used anywhere,   
+   - not just within a grid container.
+
+ - the syntax is as follows:
+
+   clamp(minimum-size, ideal-size, maximum-size)
+
+   - allows the item to resize itself until it reaches one of the minimum
+     - or maximum threshold values.
+
+
+ - clamp()'s purpose is to create a flexile sized track with constraints.
+
+   - we want to use a dynamic value for the "ideal size" argument,
+
+   - and typically a static size for the minimum and maximum thresholds.
+
+     - although it is possible to use a dynamic value here too.
+     
+
+
+-- a Non-Grid example (and then we get back to the Grid)
+
+    .non-grid-example {
+        width: clamp(500px, 80%, 1000px);
+        }
+
+    - this element which we will pretend is just a div,
+
+      - will render with a width equal to 80% of its parent's width
+
+      - unless that number is lower than 500px or higher than 1000px
+
+        - in which case, it will use those numbers as its width.
+
+
+
+-- clamp() with the Grid
+
+  grid-template-columns: repeat(5, clamp(150px, 20%, 200px));
+
+  - notice how the track stays at 20% of the width of the container,
+
+    - until they hit the minimum or maximum thresholds.
+
+
+ - using clamp() and minmax() are good methods for making grids more responsive
+ 
+   - while ensuring we do not hit critical breakpoints making, a site look bad
+
+   - this is imperative when using images and elements that may have a 
+
+     - tendency to overflow or render to undesirable ways 
+       when pushed to extreme sizes, small or large.
+
+
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Auto-Fit and Auto-Fill
+
+ - both are part of the repeat function.
+
+ - here is their use case:
+
+   - you want to give a grid a number of columns that is flexible,
+
+     - based on the size of the grid. for example:
+
+     - if our grid is only 200px wide, we may only want one column.
+
+     - if our grid is 400px wide, we may want two columns, and so on.
+
+
+ - both of these functions return the "largest possible integer"
+
+   - without the grid items overflowing their container, here is an example:
+
+
+
+
+-- example code unrelated to grid:
+
+.example {
+  display: grid;
+  width: 1000px;
+  grid-template-columns: repeat(auto-fit, 200px);
+}
+
+-- code explained:
+
+ - grid width set to 1000px 
+
+ - fill columns with tracks of 200px each
+
+ - as long as there are at least five grid items,
+
+   - this will result in a 5 column layout no matter what.
+
+   - in this case auto-fill would actually do the same thing,
+
+   - we will get into the difference soon.
+
+
+ - the real magic of auto-fit and auto-fill comes when you combine minmax().
+
+   - with minmax() you tell the grid, that you want as many columns as possible
+
+     - using the constraints of minmax() to determine each column's size, 
+
+     - without it overflowing our grid.
+
+
+
+-- Auto-Fit with the Grid:
+
+ grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+ - makes the columns automatically know how many will fit across the container
+
+
+ - auto-fit will return the highest positive integer without overflowing.
+
+   - first, the browser has to know how wide our grid is.
+
+     - in this case, it is the windows width (minus margins we have not set)
+
+
+   - second, the browser needs to know how many grid column tracks will fit in.
+
+     - to do this, it uses the minimum value from our minmax() function
+
+     - since that will yield the highest number of items 
+
+     - once the browser has determined how many columns can fit,  
+
+       - it then resizes columns up to the maximum value allowed by minmax() 
+
+       - in this case our max size is 1fr, 
+
+       - so all columns will be given an equal allotment of the space available
+
+
+ - as we resize our page or window, these calculations happen in real time,
+
+   - and the results are what you see on screen.
+
+
+
+
+-- Auto-Fill with the Grid:
+
+ - in most cases, auto-fill is going to work exactly the same way as auto-fit
+
+ - the difference is only noticeable when there are fewer grid items than,
+    what can fill up the entirety of the grid row once.
+
+
+ - when the grid is exanded to a size where another grid item COULD fit but,
+    there aren't any left, auto-fit will keep the grid items at their max size
+
+
+ - using auto-fill, the grid items will snap back down to their min size,
+    once the space becomes available to add another grid item.
+
+    - even if there isn't one to be rendered.
+
+
+ - they will continue their pattern of growing to max and snapping back to min
+    as the grid expands and more room becomes available for the new grid tracks
+
+
+
+
+*/
