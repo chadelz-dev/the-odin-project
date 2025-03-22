@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar-container">
+        <div class="logo-container">
+          <span class="sidebar-menu-logo">
+            <img src="./assets/logo-icon.svg" alt="app logo for sidebar menu" />
+          </span>
+          <p>Dashboard</p>
+        </div>
+
+        <div class="app-menu">
+          <ul class="app-menu-list">
+            <li class="app-menu-item" id="Home">
+              <span class="menu-icon">
+                <img
+                  src="./assets/sidebar-home-white-icon.svg"
+                  alt="home icon for sidebar menu"
+                />
+              </span>
+              Home
+            </li>
+            <li class="app-menu-item" id="Profile">
+              <span class="menu-icon">
+                <img
+                  src="./assets/sidebar-account-white-icon.svg"
+                  alt="profile icon for sidebar menu"
+                /> </span
+              >Profiles
+            </li>
+            <li class="app-menu-item" id="Messages">
+              <span class="menu-icon">
+                <img
+                  src="./assets/sidebar-message-bubble-white-icon.svg"
+                  alt="messages icon for sidebar menu"
+                /> </span
+              >Messages
+            </li>
+            <li class="app-menu-item" id="History">
+              <span class="menu-icon">
+                <img
+                  src="./assets/sidebar-history-line-icon.svg"
+                  alt="history icon for sidebar menu"
+                /> </span
+              >History
+            </li>
+            <li class="app-menu-item" id="Tasks">
+              <span class="menu-icon">
+                <img
+                  src="./assets/sidebar-sticky-notes-icon.svg"
+                  alt="tasks icon for sidebar menu"
+                /> </span
+              >Tasks
+            </li>
+            <li class="app-menu-item" id="Communities">
+              <span class="menu-icon">
+                <img
+                  src="./assets/sidebar-referral-customer-icon.svg"
+                  alt="communities icon for sidebar menu"
+                /> </span
+              >Communities
+            </li>
+          </ul>
+        </div>
+
+        <div class="settings-menu">
+          <ul class="settings-menu-list">
+            <li class="settings-menu-item" id="Settings">
+              <span class="settings-icon">
+                <img
+                  src="./assets/sidebar-setting-icon.svg"
+                  alt="settings icon for sidebar menu"
+                />
+              </span>
+              Settings
+            </li>
+            <li class="settings-menu-item" id="Support">
+              <span class="settings-icon">
+                <img
+                  src="./assets/sidebar-question-mark-round-icon.svg"
+                  alt="support icon for sidebar menu"
+                />
+              </span>
+              Support
+            </li>
+            <li class="settings-menu-item" id="Privacy">
+              <span class="settings-icon">
+                <img
+                  src="./assets/sidebar-lock-line-icon.svg"
+                  alt="privacy icon for sidebar menu"
+                />
+              </span>
+              Privacy
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-container">
+        <div class="header-container">
+          <div class="header-top-section">
+            <div class="header-top-search">
+              <span class="search-icon">
+                <img
+                  src="./assets/nav-search-line-icon.svg"
+                  alt="search icon for the top header section"
+                />
+              </span>
+              <input type=" text" />
+            </div>
+
+            <div class="header-top-notifications">
+              <span class="notification-icon">
+                <img
+                  src="./assets/nav-notification-alarm-buzzer-icon.svg"
+                  alt="notifications icon for the top header"
+                />
+              </span>
+              <span class="header-top-profile-image">
+                <img
+                  src="./assets/profile-pic-four.jpg"
+                  alt="top header profile image"
+                />
+              </span>
+              <p>Morgan Oakley</p>
+            </div>
+          </div>
+
+          <div class="header-bottom-section">
+            <div class="header-bottom-user">
+              <span class="user-profile-image">
+                <img
+                  src="./assets/profile-pic-four.jpg"
+                  alt="bottom header user profile image"
+                />
+              </span>
+              <div class="user-text-container">
+                <p>Hi there,</p>
+                <h3>Morgan Oakley (@morgan)</h3>
+              </div>
+            </div>
+
+            <div class="header-bottom-buttons-container">
+              <button>New</button>
+              <button>Upload</button>
+              <button>Share</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-area">
+          <div class="content-left">
+            <p>Your Projects</p>
+            <div class="content-left-grid">
+              <div class="content-left-item" id="Project-one">
+                <h4>Super Cool Project</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit
+                  modi, facere molestias tempore neque mollitia?
+                </p>
+                <div class="project-icon-container">
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-folder-bookmark-icon.svg"
+                      alt="bookmark icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-eye-icon.svg"
+                      alt="view icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-share-line-icon.svg"
+                      alt="share icon for project one"
+                    />
+                  </span>
+                </div>
+              </div>
+              <div class="content-left-item" id="Project-two">
+                <h4>Less Cool Project</h4>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Exercitationem minus sit natus provident alias aperiam! Facere
+                  minus quo a accusantium.
+                </p>
+                <div class="project-icon-container">
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-folder-bookmark-icon.svg"
+                      alt="bookmark icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-eye-icon.svg"
+                      alt="view icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-share-line-icon.svg"
+                      alt="share icon for project one"
+                    />
+                  </span>
+                </div>
+              </div>
+              <div class="content-left-item" id="Project-three">
+                <h4>Impossible App</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Maiores dolores sunt libero nihil sed voluptatibus quae optio
+                  ratione, aspernatur delectus architecto id odit deleniti
+                  similique pariatur harum cumque vitae iure!
+                </p>
+                <div class="project-icon-container">
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-folder-bookmark-icon.svg"
+                      alt="bookmark icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-eye-icon.svg"
+                      alt="view icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-share-line-icon.svg"
+                      alt="share icon for project one"
+                    />
+                  </span>
+                </div>
+              </div>
+              <div class="content-left-item" id="Project-four">
+                <h4>Easy Peasy App</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Tenetur earum perspiciatis odit.
+                </p>
+                <div class="project-icon-container">
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-folder-bookmark-icon.svg"
+                      alt="bookmark icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-eye-icon.svg"
+                      alt="view icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-share-line-icon.svg"
+                      alt="share icon for project one"
+                    />
+                  </span>
+                </div>
+              </div>
+              <div class="content-left-item" id="Project-five">
+                <h4>Ad Blocker</h4>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Quod, cum quidem expedita culpa hic, natus id consequuntur
+                  omnis sint sed nemo vitae.
+                </p>
+                <div class="project-icon-container">
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-folder-bookmark-icon.svg"
+                      alt="bookmark icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-eye-icon.svg"
+                      alt="view icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-share-line-icon.svg"
+                      alt="share icon for project one"
+                    />
+                  </span>
+                </div>
+              </div>
+              <div class="content-left-item" id="Project-six">
+                <h4>Money Maker</h4>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Architecto, quo sunt distinctio commodi ipsam, est eveniet
+                  aperiam autem eum mollitia minus quasi? Exercitationem
+                  dignissimos ut possimus laborum.
+                </p>
+                <div class="project-icon-container">
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-folder-bookmark-icon.svg"
+                      alt="bookmark icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-eye-icon.svg"
+                      alt="view icon for project one"
+                    />
+                  </span>
+                  <span class="project-icon">
+                    <img
+                      src="./assets/project-share-line-icon.svg"
+                      alt="share icon for project one"
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-right">
+            <p>Anouncements</p>
+            <div class="anouncements-container">
+              <div class="anouncements-item">
+                <div class="anouncements-item-grid">
+                  <h4>Site Maintenance</h4>
+                  <p>Lorem ipsum dolor sit amet consectetur</p>
+                  <hr />
+                  <h4>Community Share Day</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                  <hr />
+                  <h4>Updated Privacy Policy</h4>
+                  <p>Lorem ipsum dolor sit amet consectetur</p>
+                </div>
+                <div class="trending-container">
+                  <h4>Trending</h4>
+                  <div class="trending-grid">
+                    <div class="trending-grid-item">
+                      <span class="trending-profile-icon">
+                        <img
+                          src="./assets/profile-pic-one.jpg"
+                          alt="user profile pic"
+                        />
+                      </span>
+                      <div class="trending-user-container">
+                        <h6>@tegan</h6>
+                        <p>World Peace Builder</p>
+                      </div>
+                    </div>
+                    <div class="trending-grid-item">
+                      <span class="trending-profile-icon">
+                        <img
+                          src="./assets/profile-pic-four.jpg"
+                          alt="user profile pic"
+                        />
+                      </span>
+                      <div class="trending-user-container">
+                        <h6>@morgan</h6>
+                        <p>Super Cool Project</p>
+                      </div>
+                    </div>
+                    <div class="trending-grid-item">
+                      <span class="trending-profile-icon">
+                        <img
+                          src="./assets/profile-pic-two.jpg"
+                          alt="user profile pic"
+                        />
+                      </span>
+                      <div class="trending-user-container">
+                        <h6>@kendall</h6>
+                        <p>Life Changing App</p>
+                      </div>
+                    </div>
+                    <div class="trending-grid-item">
+                      <span class="trending-profile-icon">
+                        <img
+                          src="./assets/profile-pic-three.jpg"
+                          alt="user profile pic"
+                        />
+                      </span>
+                      <div class="trending-user-container">
+                        <h6>@alex</h6>
+                        <p>No Traffic Maker</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
