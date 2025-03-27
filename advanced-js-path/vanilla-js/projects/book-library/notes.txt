@@ -1,0 +1,76 @@
+1. Set Up Basics: If not done, create a Git repository 
+    with basic HTML, CSS, and JS files.
+
+
+
+2.done     Book Constructor: Make a Book constructor to create book objects 
+
+    with properties like title, author, pages, read status, 
+     and a unique ID using crypto.randomUUID().
+
+
+
+3.done      Library Array: Create an array myLibrary to store all book objects.
+
+
+
+4.done      Add Book Function: Write a separate function addBookToLibrary 
+    that takes book details as arguments, 
+    
+     creates a new book object using the constructor, 
+      and adds it to myLibrary.
+
+
+
+5.done      Display Books: Write a function to loop through myLibrary 
+    and show each book on the page (e.g., in a table or cards). 
+
+     Manually add a few books to test it.
+
+
+
+6. New Book Form: Add a “New Book” button that shows a form 
+    (e.g., sidebar or <dialog> modal) for users to input book details. 
+
+     Use event.preventDefault() to stop the form from submitting to a server, 
+      and instead add the book to myLibrary.
+
+
+
+7.done      Remove Book Button: Add a button to each book’s display 
+    to delete it from myLibrary. 
+    
+     Link each DOM element to its book object using a data-attribute
+      tied to the book’s unique ID.
+
+
+
+8.done      Toggle Read Status: Add a button to each book’s display 
+    to flip its read status. 
+    
+     Create a Book.prototype method 
+      to toggle the read property of a book instance.
+
+
+NB Notes: 
+
+Keep book data (array) and display logic separate for flexibility.
+
+No storage is required yet.
+
+
+// exercise - create a book constructor
+function BookConstructor(title, author, pages, bookRead) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.bookRead = bookRead;
+  this.info = function () {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${
+      this.bookRead ? "read" : "not read yet"
+    }`;
+  };
+}
+
+const bookOne = new BookConstructor("The Hobbit", "J.R.R. Tolkien", 295, false);
+console.log(bookOne.info()); // The Hobbit by J.R.R. Tolkien, 295 pages, not read yet
