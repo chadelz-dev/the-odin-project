@@ -1,0 +1,58 @@
+
+Set up your project with HTML, CSS, and JavaScript files 
+ and initialize a Git repository.
+
+
+Create a Gameboard object that stores the gameboard as an array. 
+- (IIFE)
+
+
+Create player objects to represent the players. 
+- (factory function with closure)
+
+
+Build an object to manage the game flow.
+- (game flow object IIFE)
+
+
+Minimize global code by using factory functions; for single-instance objects
+ (like Gameboard or displayController), use an IIFE (module pattern).
+
+
+Plan where each piece of logic belongs (Gameboard, Player, or game flow object) 
+ and organize it logically.
+
+
+Start by building a working game in the console:
+ Implement logic to check for game-over conditions (all winning 3-in-a-row combinations and ties).
+
+
+Test the game by manually calling functions with arguments (no user input yet).
+
+
+
+
+
+After the console game works, create a display/DOM logic object.
+
+
+Write a function to render the gameboard array to the webpage
+ (test with "X"s and "O"s initially).
+
+
+Add functions for players to place marks on the board via DOM interaction 
+ (e.g., clicking a square): Include logic to prevent marking already-taken spots.
+
+
+Enhance the interface:
+Allow players to input their names.
+
+
+Add a start/restart button.
+
+
+Include a display element to show the game results when it ends.
+
+
+
+
