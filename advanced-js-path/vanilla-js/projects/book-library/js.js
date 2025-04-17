@@ -12,22 +12,23 @@ const headerLabels = [
   "Actions",
 ];
 
-// Book constructor function
-function Book(title, releaseYear, author, pages, bookRead) {
-  this.title = title;
-  this.releaseYear = releaseYear;
-  this.author = author;
-  this.pages = pages;
-  this.bookRead = bookRead;
-  this.uniqueID = crypto.randomUUID();
-}
+// Book constructor function / now changed to a class
+class Book {
+  constructor(title, releaseYear, author, pages, bookRead) {
+    this.title = title;
+    this.releaseYear = releaseYear;
+    this.author = author;
+    this.pages = pages;
+    this.bookRead = bookRead;
+    this.uniqueID = crypto.randomUUID();
+  }
 
-// Method to toggle read status added to Book constructor prototype
-Book.prototype.toggleRead = function () {
-  // swaps the boolean value
-  this.bookRead = !this.bookRead;
-  return this.bookRead;
-};
+  toggleRead() {
+    // swaps the boolean value
+    this.bookRead = !this.bookRead;
+    return this.bookRead;
+  }
+}
 
 // Initialize library with default books
 const myLibrary = [
