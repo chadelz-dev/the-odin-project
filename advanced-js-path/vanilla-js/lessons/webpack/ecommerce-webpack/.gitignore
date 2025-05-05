@@ -1,0 +1,3 @@
+# Ignore Webpack dependencies and output
+node_modules/
+dist/

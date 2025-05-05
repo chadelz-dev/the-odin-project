@@ -1,0 +1,426 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- npm fundamentals:
+
+
+-- what is npm?
+
+ - npm is a package manager for javascript.
+
+
+ - massive online repository of javascript packages (plugins, libraries, tools)
+
+   - and a command line tool to install, manage and use them in a project.
+
+
+ - packages are downloaded locally into a node_modules directory,
+
+   - and you can import their code into your files.
+
+   - npm is not 'node package manager', but works with Node.js projects.
+
+     - there is no acronym, it is just the name of the tool.
+   
+
+-- why use npm?
+
+ - simplifies adding third-party code (eg: helper functions, frameworks, etc),
+
+   - to a project.
+
+
+ - manages dependencies (packages your project depends on) and their versions.
+
+   - so you don't have to manually download, install and update them.
+
+
+ - helps with complex projects, 
+
+   - by organizing dependencies, especially  when packages get updated.
+
+
+-- key npm commands (overview):
+
+ - npm install <package_name> : installs a package locally. (into project file)
+
+ - npm init : creates a package.json file  (cover this below)
+
+ - npm automatically updates package.json when you install/uninstall packages.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- package.json fundamentals:
+
+
+-- what is package.json?
+
+ - a JSON file in a projects root that describes a project and its dependencies
+
+ - acts as a blueprint for npm to manage your projects packages and settings.
+
+
+-- what does it do?
+
+ - lists dependencies (pckages your project depends on) and their versions.
+
+ - stores project metadata (eg: name, version, description, etc).
+
+ - allows npm to install all listed dependencies:
+ 
+   -  with correct versions. (using npm install)
+
+ - makes your project reproducible:
+
+   - others can clone it, run npm install, and get the same setup.
+
+// //////
+
+
+-- key fields in package.json
+
+ - name:
+
+   - your project/package name. 
+
+   - must be lowercase, no spaces, can include hyphens, dots, underscores.
+
+
+ - version: 
+
+   - project version in x.x.x format.
+   
+   -  following semantic versioning (semver) rules,  eg: 1.0.0.
+
+   - semantic verion (semver) rules:
+ 
+     - major.minor.patch
+
+     - major: changes break compatibility with previous versions.
+     - minor: adds new features.
+     - patch: fixes bugs.
+
+
+ - dependencies:
+
+   - lists packages your project needs 
+
+   - added automatically when you install packages with npm install.
+
+
+ - devDependencies:
+
+   - lists packages your project needed only for development and not production
+
+   - eg: linters, testing tools, etc.
+
+
+ - description: (optional):
+ 
+   -  a short description to make your project discoverable on npm's website.
+
+
+ - author: (optional):
+
+   - your name, email and website
+
+   - (e.g., "John Doe <john@example.com> (https://example.com)").
+
+
+ - scripts:
+
+   - an object defining custom commands (key value pairs) to run in a project.
+
+   - you run it with npm run <script_name>.
+
+   - used to automate tasks, like starting a server, building or running tools.
+
+   - what it does:
+
+     - maps short command names to shell commands or scripts.
+     - eg: "start": "node server.js"
+     - npm executes them in the projects root directory.
+
+   - how to use it:
+
+     - run npm run <script_name> in a project. (eg: npm run start)
+     - common scripts like start or test can be run as npm start, without run.
+
+   - script example:
+
+     "scripts": {
+       "start": "node server.js",
+       "build": "webpack --config webpack.config.js",
+       "lint": "eslint ."
+     }
+
+     - npm start: runs the node server named server.js
+
+     - npm run build: runs webpack with the config file: webpack.config.js
+
+     - npm run lint: runs eslint on the current directory.
+
+     - note: optional but widely used for convenience, but:
+       - you can skip it, if you don't need custom commands.
+
+// //////
+
+
+ - package.json example:
+
+   {
+     "name": "my-project",
+     "version": "1.0.0",
+     "description": "A simple project",
+     "dependencies": {
+       "lodash": "^4.17.21"
+     },
+     "devDependencies": {
+       "eslint": "^8.0.0"
+     },
+     "author": "John Doe <john@example.com>",
+     "scripts": {
+       "start": "node server.js",
+       "build": "webpack --config webpack.config.js",
+       "lint": "eslint ."
+     }
+   }
+
+   - lodash and eslint are packages.
+
+   - the ^ in ^4.17.21 means:
+
+     - npm can install any version with the same version number. (eg: 4.x.x)
+
+   - running npm install in this project installs lodash and eslint,
+
+     - with compatible versions.
+
+// //////
+
+
+-- how to use package.json:
+
+ - create a package.json file in a project root.
+
+   - do this manually or with "npm init --yes" (skips questionaire defaults).
+
+
+ - npm updates it automatically when you install/uninstall packages.
+
+
+ - share it with your project(eg: in a Git repository),
+
+   - others can run npm install to get all dependencies for the same setup.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- installing packages locally:
+
+-- what does installing a package do?
+ 
+ - downloads the package's code to a node_modules directory in your project.
+
+ - adds the package to package.json (under dependencies and devDependencies)
+
+ - allows you to import package's code in your javascript files
+  
+   - using require or import statements.
+
+// //////
+
+
+-- types of packages:
+
+-- unscoped public packages:
+
+ - freely available on npms repository (eg: lodash - a utility library).
+
+ - install command: npm install <package_name>
+
+ - adds lodash to node_modules directory and "lodash: ^x.x.x" to package.json.
+
+ 
+-- scoped packages:
+
+ - public but belong to a specific scope/organization (namespace eg: @my-org):
+ 
+   -  example: @babel/core (babel core transpiler).
+
+ - install command: npm install @my-org/<package_name>
+
+   - adds @my-org/package_name to node_modules directory and 
+
+     - "@my-org/package_name: ^x.x.x" to package.json.
+
+
+-- private packages:
+
+ - restricted access, only users with permissions can install them.
+
+ - always scoped (@my-org/package_name).
+
+ - install command: npm install @my-org/<package_name>
+
+ - requires authentication 
+
+   - not covered here, as it is specific to private regenstries.
+
+// ////// 
+
+
+-- how packages Versions work:
+
+ - if package.json exists, npm installs the latest version that matches the
+
+   - the semver rule in package.json (eg: ^4.2.1 allows 4.x.x but not 5.x.x)
+
+
+ - if no package.json, npm installs the latest version.
+
+
+ - use dist-tags to install a specific version:
+
+   - (npm install <package_name>@<version>) - installs the version tagged by @
+
+// //////
+
+
+-- checking installation
+
+ - after npm install <package_name>, check node_modules for package's folder
+
+   - ls node_modules
+
+   - verify package.json was updated with the package and version.
+
+// //////
+
+
+-- example of installing and using a package:
+
+ - run:
+
+   - npm install lodash
+
+ - result - package.json updates:
+
+   "dependencies": {
+     "lodash": "^4.17.21"
+   }
+
+   - node_modules/lodash is created with the package's code.
+
+
+ - in your javascript file:
+
+   // CommonJS
+   const _ = require('lodash');
+
+   // or ES Modules
+   import _ from 'lodash';
+
+   console.log(_.chunk([1, 2, 3, 4], 2)); // [[1, 2], [3, 4]]
+
+// ////// 
+
+
+-- key notes on installation:
+
+ - always run npm install in the project's root (where package.json is).
+
+
+ - node_modules is not shared in Git (it's in .gitignore).
+
+   - share package.json instead,
+
+   - and others run npm install to recreate node_modules.
+
+
+ - use npm install (no package name),
+ 
+   - to install all dependencies listed in package.json.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- creating a package.json file:
+
+
+-- why create a package.json file?
+
+ - required to manage dependencies and share your project.
+
+ - makes builds reproducible (others get the same dependencies)
+
+ - needed if you publish your own package to npm (not covered here)
+
+// //////
+
+
+-- fastest method:
+
+ - npm init -y
+
+ - creates a file with defaults based on the current directory.
+
+ {
+   "name": "directory-name",
+   "version": "1.0.0",
+   "description": "",
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "keywords": [],
+   "author": "", 
+   "license": "ISC"
+ }
+
+ - you can edit it manually to add dependencies, descriptions, etc.
+
+
+-- setting global default values:
+
+ npm set init-author-name "Your Name"
+ npm set init-author-email "you@example.com"
+ npm set init-license "MIT"
+
+ - these will apply to all future npm init commands.
+
+
+-- how to use package.json after creation:
+
+ - add dependencies to package.json: (npm install <package_name>)
+
+ - edit manually to add metadata (desc, auth name), scripts, etc
+
+ - run npm install to install all dependencies listed in package.json.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- critical notes for workflow:
+
+ - skip questionaires: 
+ 
+   - always use npm init -y to avoid the CLI questionaires.
+
+
+ - focus on package.json:
+
+   - it is the heart of the project, keep it clean, share it,
+
+   - and use it to manage dependencies.
+
+
+ - node_modules:
+
+   - never commit node_modules to Git, (recreate with npm install) 
+
+
+ - semantic versioning:
+
+   - understand ^ to avoid breaking changes. (ex: ^4.2.1 allows 4.x.x)
+

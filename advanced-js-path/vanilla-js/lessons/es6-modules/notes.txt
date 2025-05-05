@@ -1,0 +1,94 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+-- ES6 Modules
+
+-- HTML page notes:
+
+-- non module examples
+
+ - ex 1: globalOne.js - Pre-ES6 global scope and ex2: IIFE 
+
+ - both use regular script tags without type="module"
+
+
+-- ES6 module examples
+
+ - ex 3 - 8
+
+ - use script tags with type="module" and link only to the entry point.
+
+   - eg. blogApp.js, and feedApp.js link only to the entry point
+
+   - and the browser automatically loads the dependencies 
+   
+     - eg. loading blogTools.js via import statements.
+
+// //////
+
+
+-- key concepts:
+
+ - ES6 modules (ESM)
+
+   - javascript module systems (es6 2005) with private scope per file.
+
+   - using import / export statements for sharing values between files.
+
+
+ - Import/Export
+
+   - named exports: 
+
+     - export multiple named values (eg: export const x = 1) 
+
+     - imported with curly braces (eg: import { x } from './file.js')
+
+   - default exports:
+
+     - export one value without a name (eg export default value)
+
+     - imported with any name (eg import anyName from './file.js')
+
+
+ - module scope:
+
+   - private scope per module, explcit imports/exports required no global scope
+
+
+ - entry point:
+
+   - single <script> with a module type="module" tag 
+
+   - loads dependencies via import statements
+
+
+ - CommonJS vs ESM (es6 modules):
+
+   - CommonJS (require, module exports) is Node.js specific.
+
+   - ESM (import, export) is browser native and static
+
+
+ - pre ES6 issues:
+
+   - global scope in <script> tags causes conflicts, IIFE mitigated this.
+
+
+ - aliases:
+
+   - rename imports/exports (eg: { x as y } from './file.js')
+
+
+ - namespace imports:
+
+   - import all exports as an object ( eg: import * as Module from './file.js' )
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- 
+
+
+
+
+

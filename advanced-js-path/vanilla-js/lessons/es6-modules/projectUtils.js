@@ -1,0 +1,4 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+// example 8: entry point and dependency graph
+export const createProject = (name) => ({ id: Date.now(), name });

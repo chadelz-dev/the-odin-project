@@ -1,0 +1,6 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+// example 2: pre-es6 module patterns with IIFE
+console.log(appUtils);
+
+console.log(typeof appUtils);
