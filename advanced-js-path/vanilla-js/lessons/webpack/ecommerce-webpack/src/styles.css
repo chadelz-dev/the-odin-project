@@ -1,7 +1,9 @@
 /* Styles the product card */
 .card {
-  background-color: #e0e0e0; /* Light gray background */
-  padding: 10px; /* Space inside the card */
-  border-radius: 5px; /* Rounded corners */
-  max-width: 200px; /* Limits card width */
+  background: url('./images/product-image.jpg') no-repeat center; /* Updated path */
+  background-size: cover;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 200px;
+  color: white; /* Readable text */
 }

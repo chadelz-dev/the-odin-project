@@ -20,6 +20,14 @@ module.exports = {
         test: /\.css$/i, // find the css files
         use: ['style-loader', 'css-loader'], // processes the CSS files
       },
+      {
+        test: /\.html$/i, // find the html files
+        loader: 'html-loader', // processes the html files
+      },
+      {
+        test: /\.(png|jpg|jpeg)$/i, // find the images and bundle them
+        type: 'asset/resource',
+      },
     ],
   },
 };
