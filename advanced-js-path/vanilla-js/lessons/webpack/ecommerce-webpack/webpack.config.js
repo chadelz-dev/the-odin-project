@@ -9,6 +9,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'), // Puts it in dist/
     clean: true, // Clears dist/ before each build
   },
+  devtool: 'eval-source-map', // Helps debug errors
+  devServer: {
+    watchFiles: ['./src/template.html'], // reloads when HTML changes
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/template.html', // Copies this to dist/index.html
@@ -27,6 +31,22 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg)$/i, // find the images and bundle them
         type: 'asset/resource',
+      },
+      {
+        test: /\.(woff2|ttf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.csv$/i,
+        use: [
+          {
+            loader: 'csv-loader',
+            options: {
+              header: true, // Use first row as headers
+              skipEmptyLines: true, // Ignore blank lines
+            },
+          },
+        ],
       },
     ],
   },

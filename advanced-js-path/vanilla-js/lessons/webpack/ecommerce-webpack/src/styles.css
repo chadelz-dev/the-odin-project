@@ -1,9 +1,21 @@
+@font-face {
+  font-family: 'CustomFont';
+  src: url('./fonts/custom-font.ttf') format('truetype');
+  font-weight: 100 900;
+}
+
 /* Styles the product card */
 .card {
-  background: url('./images/product-image.jpg') no-repeat center; /* Updated path */
-  background-size: cover;
   padding: 10px;
   border-radius: 5px;
   max-width: 200px;
-  color: white; /* Readable text */
+  color: black;
+  font-family: 'CustomFont', Arial, sans-serif;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
 }

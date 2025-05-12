@@ -995,6 +995,8 @@ the-odin-project/
 
    - style.css and index.js to reflect the new images/ folder.
 
+// //////
+
 
 -- the new src/images/product-image.jpg: 
 
@@ -1004,6 +1006,8 @@ the-odin-project/
 
    - because it is in the .gitignore file.
 
+// //////
+
 
 -- how to run:
 
@@ -1011,20 +1015,28 @@ the-odin-project/
 
  - cd to the ecommerce-webpack/ folder
 
-   
+// //////
+
+
 -- install the loader plugins:
 
  - npm install --save-dev html-loader 
+
+// //////
 
 
 -- create the images/ folder and add the image:
 
  - mkdir src/images
 
+// //////
+
 
 -- update src/template.html:
 
 <img src="./images/product-image.png" alt="Product Image"> 
+
+// //////
 
 
 -- update src/styles.css:
@@ -1038,6 +1050,8 @@ the-odin-project/
   color: white; /* Readable text */
 }
 
+// //////
+
 
 -- update src/index.js:
 
@@ -1049,6 +1063,7 @@ imageElement.src = productImage;
 imageElement.alt = "Product Image";
 cardElement.appendChild(imageElement);
 
+// //////
 
 
 -- update webpack.config.js:
@@ -1082,13 +1097,620 @@ module.exports = {
   }
 };
 
+// //////
+
+
 -- run webpack:
 
  - npx webpack
 
+// ////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////
 
+
+-- step 5 webpack development server:
+
+ - add webpack-dev-server to auto-reload the browser when you edit files,
+
+   - so you do not have to run npm webpack each time you make a change.
+
+
+-- files and their purpose:
+
+-- webpack.config.js (updated)
+
+ - what:
+
+   - adds settings for the dev server and source maps.
+   
+ - why:
+
+   - the dev server watches for file changes and rebuilds in memory.
+
+   - source maps make errors point to your original code, not the bundle.
+
+ - created:
+
+   - update the existing file
+
+
+-- new directory shape:
  
+ - no changes, just updating the webpack.config.js file.
+
+// //////
+
+-- how it works:
+
+ - the dev server runs your app on http://localhost:8080
+
+ - when you edit files (eg: src/styles.css) it rebuilds and refreshes the browser.
+
+ - source maps show errors in index.js or styles.css, not the bundled main.js.
+
+
+// //////
+
+-- how to run:
+
+-- install the plugin:
+
+ - cd to your ecommerce-webpack/ folder and then run:
+
+   npm install --save-dev webpack-dev-server
+
+
+-- update webpack.config.js
+
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  mode: "development",
+  entry: "./src/index.js",
+  output: {
+ 
+  },
+  devtool: "eval-source-map", // Helps debug errors
+  devServer: {
+    watchFiles: ["./src/template.html"] // Reloads when HTML changes
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+    })
+  ],
+  module: {
+    rules: [
+      {
+
+      },
+      {
+
+      },
+      {
+
+      }
+    ]
+  }
+};
+
+-- start the dev server:
+
+ - npx webpack serve
+
+ - to get the the dev server in your browser,
+
+   - go to http://localhost:8080
+
+
+-- restart the dev server:
+
+ - if you make changes to the webpack.config.js file:
+
+   - ctrl + c will stop the server
+
+   - then restart the server with npx webpack serve
+
+
+// ////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- step 6 asset management (fonts and cvs):
+
+ - add a custom font to style the card and a CSV file to display multiple products.
+
+ - makes the app more dynamic and realistic, aligning with real-world projects.
+
+-- the font:
+
+ - custom-font.woff2
+
+ - will be stored in src/fonts/ to group typography assets.
+
+-- the CSV:
+
+ - products.csv will be stored in src/data/ to organize data files,
+
+   - as is common in projects that manage datasets (eg: CSV JSON)
+
+ - these changes ensure assets are neatly organized in dedicated subfolders
+
+   - (src/images/, src/fonts/, src/data/) mimicking professional e-commerce projects.
+
+// //////
+
+
+-- files and their purpose:
+
+-- src/fonts/custom-font.ttf
+
+ - what:
+
+   - a font file for custom typography
+
+ - why:
+
+   - enhances the card's appearance with a unique font (eg: a stylish typeface)
+
+   - storing it in src/fonts/ organizes typography assets,
+
+     - as is standard in real world projects.
+
+ - created:
+
+   - you add it manually
+
+   - find a free woff2 or ttf font online, eg: from google fonts.
+
+// //////
+
+
+-- src/data/products.csv
+
+ - what:
+
+   - a csv data file, listing multiple products.
+
+ - why:
+
+   - enables displaying multiple products dynamically without hardcoding.
+
+   - placing it in src/data/ groups data files,
+   
+     -  reflecting real-world practices for managing datasets.
+
+ - created:
+
+   - create it manually.
+
+// //////
+
+
+-- src/styles.css (updated)
+
+ - what:
+
+   - uses the custom font from src/fonts/
+
+ - why:
+
+   - applies the font to the card, with the path updated to fonts/custom-font.tff
+
+ - created:
+
+   - update the existing styles.css file.
+
+// //////
+
+
+-- src/index.js (updated)
+
+ - what:
+
+   - reads the CSV from src/data/ and creates cards for each product,
+
+   - reusing the image from src/images/ and the custom font from src/fonts/.
+
+ - why:
+
+   - makes the app scalable for multiple products,
+
+     - with updated paths for the CSV and image.
+
+ - created:
+
+   - you update the existing file.
+
+// //////
+
+
+-- webpack.config.js (updated)
+
+ - what:
+
+   - adds loaders for fonts and CSV assets.
+
+ - why:
+
+   - ensures fonts and CSV files are bundled correctly,
+
+   - the configuration supports files in src/fonts/ and src/data/ without changes,
+
+     - as loaders match file extensions, not specific folders.
+
+ - created:
+
+   - update the existing file.
+
+// //////
+
+
+-- dist/[hashed-font].ttf
+
+ - what:
+
+   - the bundled font file with a hashed name (eg xyz789.ttf)
+
+ - why:
+
+   - included in the bundle for the browser to apply the font.
+
+ - created:
+
+   - auto generated by webpack.
+
+ - git note:
+
+   - ignored by .gitignore ass part of the dist/ folder.
+
+// //////
+
+
+-- src/[hashed-image].jpg
+
+ - what:
+
+   - the bundled image file from src/images/
+
+ - why:
+
+   - included in the bundle for the browser to display the image.
+
+ - created:
+
+   - auto generated by webpack.
+
+ - git note:
+
+   - ignored by .gitignore ass part of the dist/ folder.
+   
+
+-- new directory shape:
+
+the-odin-project/
+└── advanced-js/
+    └── vanilla-js/
+        └── lessons/
+            └── webpack/
+                └── ecommerce-webpack/
+                    ├── .gitignore
+                    ├── package.json
+                    ├── package-lock.json
+                    ├── node_modules/
+                    ├── src/
+                    │   ├── index.js
+                    │   ├── template.html
+                    │   ├── styles.css
+                    │   ├── images/
+                    │   │   ├── headphones.jpg
+                    │   │   ├── bluetooth-speaker.jpg
+                    │   ├── fonts/
+                    │   │   ├── custom-font.ttf
+                    │   ├── data/
+                    │   │   ├── products.csv
+                    ├── webpack.config.js
+                    ├── dist/
+                    │   ├── main.js
+                    │   ├── index.html
+                    │   ├── [hashed-headphones].jpg
+                    │   ├── [hashed-speaker].jpg
+                    │   ├── [hashed-font].ttf
  
 
+// //////
+
+-- how to run:
+
+-- install the plugin:
+
+ - cd to your ecommerce-webpack/ folder and then run:
+ 
+   - npm install --save-dev csv-loader
+
+// //////
+
+
+-- create src/data/products.csv:
+
+name,price,image
+Wireless Headphones,99.99,headphones.jpg
+Bluetooth Speaker,199.99,bluetooth-speaker.jpg
+
+// //////
+
+
+-- update src/index.js:
+
+// import css to style the card
+import './styles.css';
+
+// Imports product data
+import productsList from './data/products.csv';
+
+// import images
+import headphonesImage from './images/headphones.jpg';
+import speakerImage from './images/bluetooth-speaker.jpg';
+
+// Maps image variables to the image file names
+const imageMap = {
+  'headphones.jpg': headphonesImage,
+  'bluetooth-speaker.jpg': speakerImage,
+};
+
+// Gets the card-container element
+const container = document.getElementById('card-container');
+
+// Loops through the products and creates a card for each
+productsList.forEach((product) => {
+  // Creates a product card element
+  const cardElement = document.createElement('div');
+
+  // Adds a class to the card
+  cardElement.classList.add('card');
+
+  // Creates a product card element
+  cardElement.innerHTML = `
+    <h2>${product.name}</h2>
+    <p>Price: $${product.price}</p>
+  `;
+
+  // Creates an image element
+  const imageElement = document.createElement('img');
+
+  // Updates the path to the image and adds alt text
+  imageElement.src = imageMap[product.image];
+  imageElement.alt = product.name;
+
+  // Adds image dynamically
+  cardElement.appendChild(imageElement);
+
+  // Adds the card to the page
+  container.appendChild(cardElement);
+});
+
+// //////
+
+
+-- update src/styles.css:
+
+@font-face {
+  font-family: 'CustomFont';
+  src: url('./fonts/custom-font.ttf') format('truetype');
+  font-weight: 100 900;
+}
+
+/* Styles the product card */
+.card {
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 200px;
+  color: black;
+  font-family: 'CustomFont', Arial, sans-serif;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+// //////
+
+
+-- update webpack.config.js:
+
+const path = require('path'); // Helps Webpack find the dist/ folder
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  mode: 'development', // Makes the bundle readable for debugging
+  entry: './src/index.js', // Starts bundling here
+  output: {
+    filename: 'main.js', // Name of the bundled file
+    path: path.resolve(__dirname, 'dist'), // Puts it in dist/
+    clean: true, // Clears dist/ before each build
+  },
+  devtool: 'eval-source-map', // Helps debug errors
+  devServer: {
+    watchFiles: ['./src/template.html'], // reloads when HTML changes
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/template.html', // Copies this to dist/index.html
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i, // find the css files
+        use: ['style-loader', 'css-loader'], // processes the CSS files
+      },
+      {
+        test: /\.html$/i, // find the html files
+        loader: 'html-loader', // processes the html files
+      },
+      {
+        test: /\.(png|jpg|jpeg)$/i, // find the images and bundle them
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff2|ttf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.csv$/i,
+        use: [
+          {
+            loader: 'csv-loader',
+            options: {
+              header: true, // Use first row as headers
+              skipEmptyLines: true, // Ignore blank lines
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+
+-- finally run it with webpack:
+
+ - npx webpack serve
+
+// //////
+
+// ////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- summary for webpack setup and usage:
+
+
+-- final csv file:
+
+
+const path = require('path'); // Helps Webpack find the dist/ folder
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  mode: 'development', // Makes the bundle readable for debugging
+  entry: './src/index.js', // Starts bundling here
+
+
+  output: {
+    filename: 'main.js', // Name of the bundled file
+    path: path.resolve(__dirname, 'dist'), // Puts it in dist/
+    clean: true, // Clears dist/ before each build
+  },
+
+
+  devtool: 'eval-source-map', // Helps debug errors
+  devServer: {
+    watchFiles: ['./src/template.html'], // reloads when HTML changes
+  },
+
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/template.html', // Copies this to dist/index.html
+    }),
+  ],
+
+
+  module: {
+    rules: [
+      {
+        test: /\.css$/i, // find the css files
+        use: ['style-loader', 'css-loader'], // processes the CSS files
+      },
+      {
+        test: /\.html$/i, // find the html files
+        loader: 'html-loader', // processes the html files
+      },
+      {
+        test: /\.(png|jpg|jpeg)$/i, // find the images and bundle them
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff2|ttf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.csv$/i,
+        use: [
+          {
+            loader: 'csv-loader',
+            options: {
+              header: true, // Use first row as headers
+              skipEmptyLines: true, // Ignore blank lines
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+
+
+-- initialize the project:
+
+ - npm init -y
+
+
+-- install webpack dependencies:
+
+npm install --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin 
+                      style-loader css-loader html-loader csv-loader
+
+-- npm install explained:
+
+ - webpack: Bundles your shit (JS, CSS, images, etc.).
+
+ - webpack-cli: Lets you run Webpack commands.
+
+ - webpack-dev-server: Runs a dev server with live reloading.
+
+ - html-webpack-plugin: Makes dist/index.html from your HTML template.
+
+ - style-loader: Shoves CSS into the DOM.
+
+ - css-loader: Handles CSS imports and URLs.
+
+ - html-loader: Processes HTML files and fixes asset paths.
+
+ - csv-loader: Turns CSV files into JS arrays.
+
+
+-- configure webpack:
+
+ - use webpack.config.js to configure Webpack.
+
+   - manages settings like entry point, output, loaders, plugins, etc.
+
+   - built in asset/resource handles images, fonts, and CSV files.
+
+     - no extra installs.
+
+
+-- run webpack:
+
+ - development mode:
+
+   - npx webpack serve
+
+
+ - production mode:
+ 
+   - npx webpack
+
+
+
+-- quick note:
+
+ - make sure package.json exists (npm init -y) and all dependencies are installed
+ 
+   -  before running any webpack commands.
 
 
