@@ -1,0 +1,78 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+-- JSON (Javascript Object Notation):
+
+ - what is JSON?
+
+   - json is a text-based format, based on JS object syntax
+
+   - used for API data exchange in web apps,
+
+   - its a string parsed into a JS object or array for UI rendering.
+
+
+ - JSON structure:
+
+   - supports primitives (strings, numbers, booleans, null)
+
+   - and also supports non-primitives (objects, arrays)
+
+   - requires double quotes for strings, 
+   
+   - NO single quotes, functions, undefined NaN, infinity or trailing commas.
+
+
+ - Parsing and Serializing JSON:
+
+   - JSON.parse():
+
+     - converts a JSON string to a JS object (deserialization)
+
+     - JSON.stringify():
+
+       - converts a JS object to a JSON string (serialization)
+
+
+ - accessing data:
+
+   - parsed JSON is accessed using dot ( . ) or bracket ( [ ] ) notation 
+
+     - to populate UI elements.
+
+
+ - real world use:
+
+   - JSON drives dynamic UIs, like displaying Jedi profiles in a fan app,
+
+     - or product details in an e-commerce app.
+
+
+ - fromatting pitfalls:
+
+   - invalid JSON (eg: single quotes, trailing commas) causes SyntaxError in JSON.parse()
+
+   - validate with tools like JSONLint
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- What It Does:
+
+
+ - Displays a header (“Jedi Order”, “Home Planet: Coruscant // Founded: -232”).
+
+
+ - Shows a form to add new Jedis.
+
+
+ - Lists initial Jedis (Luke, Ahsoka) in <section id="jediOutput">.
+
+
+ - When you submit the form 
+ 
+   - (e.g., “Obi-Wan Kenobi”, “67”, “Ben”, “Force Push, Lightsaber Mastery”), 
+   
+     - the new Jedi is added to allJedis and displayed in the same list, 
+     
+     - updating the UI instantly.
+

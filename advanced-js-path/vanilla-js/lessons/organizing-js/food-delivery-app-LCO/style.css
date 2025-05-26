@@ -1,0 +1,19 @@
+.form {
+  margin: 20px;
+}
+
+.orders {
+  margin-top: 20px;
+}
+
+.order {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 5px 0;
+}
+
+input,
+button {
+  padding: 5px;
+  margin-right: 10px;
+}

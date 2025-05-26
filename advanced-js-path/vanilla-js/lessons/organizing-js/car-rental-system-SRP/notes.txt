@@ -1,0 +1,93 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+-- purpose:
+
+ - demonstrates SRP by separating car logic (RentalCar) 
+
+   - from logging (RentalLogger) with a UI
+
+
+-- key concepts:
+
+ -  SRP RentalCar handles car behavior,
+
+   - RentalLogger manages UI logs.
+
+
+ - why it matters:
+
+   - separating logging simplifies changes (eg: switching to file logging)
+
+
+ - pitfalls: 
+
+   - mixing logging with logic, increases maintenance effort.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- what the code does:
+
+ - RentalLogger appends logs to a UI div
+
+ - RentalCar manages car state (fuel, start logic)
+
+ - rentalController binds buttons to start cars and update status
+
+
+-- how it works:
+
+ - RentalLogger.log:
+
+   - adds messages to the UI log (SRP: only logging)
+
+
+ - RentalCar.start: 
+ 
+   - checks fuel and logs via RentalLogger (SRP: only car logic)
+
+
+ - RentalCar.consumeFuel:
+
+   - updates fuel level
+
+
+ - rentalController:
+
+   - handles button clicks and UI updates
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- why its written this way:
+
+
+ - SRP Compliance:
+
+   - RentalCar handles logic, RentalLogger handles UI output.
+
+
+ - Maintainability:
+
+   - logging changes (eg: to API) only affect RentalLogger
+
+
+ - simple UI:
+
+   - buttons and log focus on the JS concepts
+
+
+
+-- variable names:
+
+ - make, model, fuelLevel (RentalCar)
+
+ - message, logElement (RentalLogger)
+
+ - car1, car2, car1Button, car2Button, car1Status, car2Status (rentalController)
+
+ - no conflicts, scoped or unique
+
+ 
+
+   

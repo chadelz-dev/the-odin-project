@@ -1,0 +1,14 @@
+.car {
+  margin: 10px;
+}
+
+.log {
+  margin-top: 20px;
+  font-size: 16px;
+  white-space: pre-line;
+}
+
+button {
+  padding: 5px 10px;
+  margin-left: 10px;
+}

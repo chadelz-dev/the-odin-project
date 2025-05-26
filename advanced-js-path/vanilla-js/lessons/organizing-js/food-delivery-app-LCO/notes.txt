@@ -1,0 +1,199 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+-- food delivery app LCO (loosely coupled objects)
+
+-- purpose:
+
+ - demonstrates loose coupling using Pub/Sub to separate orders
+
+   - from deliveries
+
+
+-- key concepts:
+
+ - loose coupling:
+
+   - modules communicate via events (Pub/Sub not direct references) 
+
+
+ - why it matters:
+
+   - allows swapping modules (eg: new delivery logic) without breaking others.
+
+
+ - Pub/Sub:
+
+   - a mediator pattern wherer modules publish and subscribe to topics.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- what the code does:
+
+ - PubSubSystem:
+
+   - mediates communication via topics.
+
+
+ - FoodOrderModule:
+
+   - creates orders, subscribes to delivery times, and renders orders.
+
+
+ - DeliveryModule:
+
+   - publishes delivery times based on order count.
+
+ 
+ - deliveryAppController:
+
+   - handles form submissions and updates.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- how it works:
+
+ - PubSubSystem.subscribe/publish:
+
+   - manages topic-based callbacks (loose coupling).
+
+
+ - FoodOrderModule.createOrder:
+
+   - adds orders with cached delivery time (SRP: order management).
+
+
+ - renderOrders:
+
+   - updates the UI order list (SRP: UI rendering)
+
+
+ - DeliveryModule.calculateDeliveryTime:
+
+   - publishes times (SRP: delivery logic)
+
+
+ - deliveryAppController:
+
+   - binds form to order creation and times updates.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- why its written this way:
+
+
+ - loose coupling:
+
+   - FoodOrderModule and DeliveryModule communicate via PubSubSystem, 
+   
+   - not direct references
+
+
+ - simple UI:
+
+   - form and order list focus on the JS concept (Pub/Sub)
+
+
+ - realistic:
+
+   - mimics food delivery apps like uber eats.
+
+ // ////////////////////////////////////////////////////////////////////////////
+ // ////////////////////////////////////////////////////////////////////////////
+
+
+-- aditional SOLID principles (brief overview):
+
+
+-- open-closed principle (OCP):
+
+ - extend functionality without modifying code
+  
+   - (eg: add new game features via composition)
+
+
+-- liskov substition principle (LSP):
+
+ - subclasses should replace parents without issues
+
+
+-- interface segregation principle (ISP):
+
+ - use specific interfaces
+
+   - (eg: separate Loggable from Drivable)
+
+
+-- dependency inversion principle (DIP):
+
+ - depend on abstractions
+
+   - (eg: inject logger interface)
+
+
+-- why it matters:
+
+ - SOLID ensures scalable code, tested in interviews (eg: system design)
+
+ // ////////////////////////////////////////////////////////////////////////////
+ // ////////////////////////////////////////////////////////////////////////////
+
+
+-- composition vs inheritance:
+
+ - inheritance:
+
+   - can break if parent changes.
+
+
+ - composition:
+
+   - flexible, combining behaviors.
+
+   - example: in the food delivery: 
+
+     - FoodOrderModule uses PubSubSystem instead of inheriting.
+
+
+ - why it is preferred:
+
+   - composition allows swapping behaviors without altering classes.
+
+
+-- why it matters:
+
+ - real world:
+
+   - used in React (components) and game engines (systems).
+
+
+ - interview:
+
+   - refactor inheritance to composition or design flexible systems.
+
+ // ////////////////////////////////////////////////////////////////////////////
+ // ////////////////////////////////////////////////////////////////////////////
+
+
+-- real world relevance:
+
+
+ - SRP (single responsibility principle):
+
+   - separating logic/UI is standard in web apps (eg: react + redux)
+
+   - interviews test with refacotring or UI tasks.
+
+
+ - LC (loose coupling):
+
+   - used in microservices or event-driven apps (eg: redux actions)
+
+     - interviews may require event systems
+
+
+ - SOLID composition:
+
+   - common in large apps and system design questions.

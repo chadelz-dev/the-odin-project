@@ -1,0 +1,107 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+-- SRP (Single Responsibility Principle)
+
+-- purpose:
+
+ - demonstrate SRP by separating game logic (TicTacToeGame) 
+ 
+ - from UI rendering (TicTacToeDisplay)
+
+ - from game controller (gameController)
+
+
+-- Key Concepts:
+
+ - SRP:
+
+   - each module has one Responsibility (logic or UI)
+
+   - TicTacToeGame handles the game state,
+
+   - TicTacToeDisplay manages DOM updates.
+
+
+ - why it matters:
+
+   - separating concerns ensures changes to the UI (eg: styling)
+
+     - dont affect logic, improving maintainability
+
+
+ - pitfall:
+
+   - mixing logic and UI (as in the original isGameOver) creates fragile code.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- what the code does:
+
+ - TicTacToeGame: 
+
+   - manages game state and logic (board, moves, win/draw checks)
+
+ - TicTacToeDisplay:
+
+   - renders a 3x3 button grid and updates the result div
+
+ - gameController:
+
+   - coordinates gameplay, handling clicks and updating UI/logic
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- how it works:
+
+ - checkGameOver:
+
+   - checks win patterns or a full board, setting gameWinner if applicable 
+   
+     - (SRP - only checks state)
+
+
+ - makeMove:
+
+   - updates boardState and switches currentPlayer (SRP - only modifies state)
+
+
+ - renderBoard:
+
+   - creates clickable buttons for each cell (SRP - handles UI) 
+
+
+ - showGameOver:
+
+   - updates the result div (SRP - only displays result)
+
+
+ - gameController:
+
+   - orchestrates moves and UI updates 
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- why its written this way:
+
+ - SRP compliance:
+
+   - logic (TicTacToeGame) and UI (TicTacToeDisplay) are separate modules
+
+     - so UI changes (eg: styling) don't affect logic
+
+
+ - reusability:
+
+   - game logic can be reused in console or mobile apps
+
+
+ - clarity:
+
+   - simple grid UI focuses on the JS concept
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
