@@ -1,0 +1,14 @@
+{
+  "name": "@chadelz/dropdown-module",
+  "version": "1.0.1",
+  "main": "dropdown.js",
+  "type": "module",
+  "description": "Reusable JavaScript dropdown menu module",
+  "keywords": [
+    "dropdown",
+    "javascript",
+    "ui"
+  ],
+  "author": "chadelz",
+  "license": "MIT"
+}

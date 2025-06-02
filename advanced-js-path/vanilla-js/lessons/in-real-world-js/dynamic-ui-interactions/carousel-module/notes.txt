@@ -1,0 +1,49 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+-- key concepts 
+
+-- what is this
+
+ - reusable image carousel module (@chadelz/carousel-module@1.0.0)
+
+
+-- purpose:
+
+ - display travel destinations with navigation and an auto advance
+
+   - with pause on mouse over and continue on mouse leave
+
+
+-- how it works:
+
+ - javascript:
+
+   - carousel.js uses initCarousels() to manage [data-carousel] elements
+
+   - slide [data-carousel-slides] with translateX
+
+   - create [data-carousel-dots], and handle [data-carousel-prev]/[next] clicks
+
+   - auto advance every 2.5s, pauses on hover, auto-initializes with initCarousels()
+
+
+ - css:
+
+   - styles.css styles slides, buttons, dots
+
+
+ - html: 
+
+   - index.html tests with 5 images from images/ folder
+
+
+-- why:
+
+ - reusable module for any image gallery
+
+
+-- files:
+
+ - carousel.js
+
+   - core logic, publish to npm

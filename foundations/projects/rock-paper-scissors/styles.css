@@ -1,0 +1,41 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+input:invalid {
+  border-color: red;
+}
+
+input:valid {
+  border-color: green;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  display: none;
+}
+
+input:invalid + .error {
+  display: block;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#welcomeMessage {
+  display: none;
+  color: green;
+  font-weight: bold;
+}

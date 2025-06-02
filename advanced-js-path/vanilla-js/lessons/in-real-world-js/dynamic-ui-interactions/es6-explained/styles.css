@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+button {
+  margin-right: 10px;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #4e4e4e;
+}
+
+button:hover {
+  background-color: #f4f4f4;
+}
+
+.output {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  min-height: 100px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0;
+}

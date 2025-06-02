@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./application.js" defer></script>
+    <title>Form Validation</title>
+  </head>
+  <body>
+    <h2>Job Application</h2>
+
+    <form id="applicationForm" novalidate>
+      <label for="applicantName">Full Name:</label>
+      <input type="text" id="applicantName" required pattern="[A-Za-z\s]+" />
+      <span id="applicantNameError"
+        >Please enter your full name (letters and spaces only).</span
+      >
+
+      <label for="applicantEmail">Email:</label>
+      <input type="email" id="applicantEmail" required />
+      <span class="error" id="applicantEmailError"
+        >Please enter a valid email (eg: name@example.com).</span
+      >
+
+      <label for="applicantCountry">Country:</label>
+      <input type="text" id="applicantCountry" required pattern="[A-Za-z]+" />
+      <span class="error" id="applicantCountryError"
+        >Please enter a valid country name (letters only).</span
+      >
+
+      <label for="applicantPostalCode">Postal Code:</label>
+      <input
+        type="text"
+        id="applicantPostalCode"
+        required
+        pattern="[A-Za-z0-9\s-]{3,10}"
+      />
+      <span class="error" id="applicantPostalCodeError"
+        >Please enter a valid postal code (3-10 characters).</span
+      >
+
+      <label for="applicantPassword">Password:</label>
+      <input type="password" id="applicantPassword" required minlength="8" />
+      <span class="error" id="applicantPasswordError"
+        >Password must be 8 characters.</span
+      >
+
+      <label for="applicantPasswordConfirm">Confirm Password:</label>
+      <input type="password" id="applicantPasswordConfirm" required />
+      <span class="error" id="applicantPasswordConfirmError"
+        >Passwords do not match.</span
+      >
+
+      <button type="submit">Submit Application</button>
+    </form>
+    <p id="successMessage">Nice, Your application has been received!</p>
+  </body>
+</html>

@@ -3,11 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="js.js" defer></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./js.js" defer></script>
+    <title>RPS Game</title>
   </head>
   <body>
     <h2>Rock Paper Scissors Game</h2>
+    <form id="playerForm" novalidate>
+      <label for="playerName">Player Name:</label>
+      <input type="text" id="playerName" required />
+      <span class="error" id="playerNameError">Please enter your name</span>
+      <button type="submit">Start Game</button>
+    </form>
+    <p id="welcomeMessage"></p>
     <div class="displayResults">
       <h3 class="resultsHeading">Heading</h3>
       <p class="resultsMessage">display message</p>

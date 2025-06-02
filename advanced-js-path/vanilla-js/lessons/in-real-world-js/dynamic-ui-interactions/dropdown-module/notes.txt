@@ -1,0 +1,58 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+-- key concepts:
+
+-- purpose:
+ 
+ - toggle a menu visibility on click or hover (mouseover)
+
+   - (eg: social media sharing dropdown)
+
+
+-- mechanics:
+
+ - uses click or mouseover listeners to toggle a CSS class (is-visible)
+
+ - handles outside clicks and multiple dropdowns
+
+
+-- why this way:
+
+ - data attributes and options ensure flexibility, 
+ 
+ - scoped npm packages avoids naming conflicts
+
+
+-- terminology:
+
+ - data attributes:
+
+   - html attributes (eg: data-dropdown) for flexible selection
+
+
+-- real world use:
+
+ - used in social media (post menus), navbars or forms.
+
+
+-- interview:
+
+ - tests dom manipulation, event listeners, modularity, and data attributes
+
+   - eg: build a dropdown menu that closes on outside click
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- usage from npm
+
+ - install in other projects with:
+
+ npm install @chadelz/dropdown-module
+
+ - then import it:
+
+ import { initDropdowns } from '@chadelz/dropdown-module';
+ 
+ initDropdowns();

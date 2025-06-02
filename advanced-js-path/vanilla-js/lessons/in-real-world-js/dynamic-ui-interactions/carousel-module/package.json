@@ -1,0 +1,14 @@
+{
+  "name": "@chadelz/carousel-module",
+  "version": "1.0.0",
+  "main": "carousel.js",
+  "type": "module",
+  "description": "Reusable JavaScript image carousel module",
+  "keywords": [
+    "carousel",
+    "javascript",
+    "ui"
+  ],
+  "author": "chadelz",
+  "license": "MIT"
+}

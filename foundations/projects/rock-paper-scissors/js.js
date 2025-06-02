@@ -12,56 +12,56 @@ let losingRoundMessage;
 let drawRoundMessage;
 
 // Elements
-const scissorButton = document.querySelector("#scissors");
-const paperButton = document.querySelector("#paper");
-const rockButton = document.querySelector("#rock");
-const displayResultsDiv = document.querySelector(".displayResults");
-const buttonsContainerDiv = document.querySelector(".buttonsContainer");
-const resultsHeading = document.querySelector(".resultsHeading");
-const resultsMessage = document.querySelector(".resultsMessage");
-const playNextRoundMessage = document.createElement("p");
-const roundChoices = document.createElement("p");
+const scissorButton = document.querySelector('#scissors');
+const paperButton = document.querySelector('#paper');
+const rockButton = document.querySelector('#rock');
+const displayResultsDiv = document.querySelector('.displayResults');
+const buttonsContainerDiv = document.querySelector('.buttonsContainer');
+const resultsHeading = document.querySelector('.resultsHeading');
+const resultsMessage = document.querySelector('.resultsMessage');
+const playNextRoundMessage = document.createElement('p');
+const roundChoices = document.createElement('p');
 
-resultsHeading.textContent = "Choose your weapon!";
-resultsMessage.textContent = "First to 5 wins!";
-playNextRoundMessage.textContent = "Choose your weapon to play next round!";
+resultsHeading.textContent = 'Choose your weapon!';
+resultsMessage.textContent = 'First to 5 wins!';
+playNextRoundMessage.textContent = 'Choose your weapon to play next round!';
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // -- CSS settings using JS
 
 // bg colour
-document.body.style.backgroundColor = "#C3D69B";
+document.body.style.backgroundColor = '#C3D69B';
 
 // flexbox on body
-document.body.style.height = "100vh";
-document.body.style.display = "flex";
-document.body.style.justifyContent = "center";
-document.body.style.alignItems = "center";
-document.body.style.flexDirection = "column";
+document.body.style.height = '100vh';
+document.body.style.display = 'flex';
+document.body.style.justifyContent = 'center';
+document.body.style.alignItems = 'center';
+document.body.style.flexDirection = 'column';
 
 // font colours
-document.body.style.fontFamily = "Tahoma";
-document.body.style.color = "white";
+document.body.style.fontFamily = 'Tahoma';
+document.body.style.color = 'white';
 
 // buttons
-let buttons = document.querySelectorAll(".btn");
+let buttons = document.querySelectorAll('.btn');
 
 buttons.forEach((button) => {
-  button.style.padding = "10px 20px";
-  button.style.margin = "5px";
-  button.style.border = "1px solid white";
-  button.style.backgroundColor = "white";
-  button.style.color = "#A0B069";
-  button.style.borderRadius = "10px";
-  button.style.fontWeight = "bold";
+  button.style.padding = '10px 20px';
+  button.style.margin = '5px';
+  button.style.border = '1px solid white';
+  button.style.backgroundColor = 'white';
+  button.style.color = '#A0B069';
+  button.style.borderRadius = '10px';
+  button.style.fontWeight = 'bold';
 });
 
 // result message and heading
-resultsMessage.style.textAlign = "center";
-resultsHeading.style.textAlign = "center";
-roundChoices.style.textAlign = "center";
-playNextRoundMessage.style.textAlign = "center";
+resultsMessage.style.textAlign = 'center';
+resultsHeading.style.textAlign = 'center';
+roundChoices.style.textAlign = 'center';
+playNextRoundMessage.style.textAlign = 'center';
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -73,9 +73,9 @@ function getCompChoice(num) {
   const choiceNum = Math.floor(Math.random() * num);
 
   // assign that number to an actual RPS value
-  if (choiceNum === 0) compChoice = "Scissors";
-  else if (choiceNum === 1) compChoice = "Paper";
-  else compChoice = "Rock";
+  if (choiceNum === 0) compChoice = 'Scissors';
+  else if (choiceNum === 1) compChoice = 'Paper';
+  else compChoice = 'Rock';
 
   // return the compChoice for use
   return compChoice;
@@ -86,18 +86,18 @@ function getCompChoice(num) {
 // -- User Choice
 
 // get user choice from button click
-scissorButton.addEventListener("click", () => {
-  userChoice = "Scissors";
+scissorButton.addEventListener('click', () => {
+  userChoice = 'Scissors';
   playRound(compChoice, userChoice);
 });
 
-paperButton.addEventListener("click", () => {
-  userChoice = "Paper";
+paperButton.addEventListener('click', () => {
+  userChoice = 'Paper';
   playRound(compChoice, userChoice);
 });
 
-rockButton.addEventListener("click", () => {
-  userChoice = "Rock";
+rockButton.addEventListener('click', () => {
+  userChoice = 'Rock';
   playRound(compChoice, userChoice);
 });
 
@@ -112,22 +112,22 @@ function playRound(compChoice, userChoice) {
   roundChoices.textContent = `User choice: ${userChoice}, Computer choice: ${compChoice}`;
 
   // Game Logic
-  if (userChoice === "Scissors" && compChoice === "Paper") {
+  if (userChoice === 'Scissors' && compChoice === 'Paper') {
     userScore++;
     roundNumber++;
-  } else if (userChoice === "Scissors" && compChoice === "Rock") {
+  } else if (userChoice === 'Scissors' && compChoice === 'Rock') {
     compScore++;
     roundNumber++;
-  } else if (userChoice === "Rock" && compChoice === "Scissors") {
+  } else if (userChoice === 'Rock' && compChoice === 'Scissors') {
     userScore++;
     roundNumber++;
-  } else if (userChoice === "Rock" && compChoice === "Paper") {
+  } else if (userChoice === 'Rock' && compChoice === 'Paper') {
     compScore++;
     roundNumber++;
-  } else if (userChoice === "Paper" && compChoice === "Rock") {
+  } else if (userChoice === 'Paper' && compChoice === 'Rock') {
     userScore++;
     roundNumber++;
-  } else if (userChoice === "Paper" && compChoice === "Scissors") {
+  } else if (userChoice === 'Paper' && compChoice === 'Scissors') {
     compScore++;
     roundNumber++;
   } else {
@@ -141,15 +141,15 @@ function playRound(compChoice, userChoice) {
 
   // Display appropriate message
   if (
-    (userChoice === "Scissors" && compChoice === "Paper") ||
-    (userChoice === "Rock" && compChoice === "Scissors") ||
-    (userChoice === "Paper" && compChoice === "Rock")
+    (userChoice === 'Scissors' && compChoice === 'Paper') ||
+    (userChoice === 'Rock' && compChoice === 'Scissors') ||
+    (userChoice === 'Paper' && compChoice === 'Rock')
   ) {
     resultsMessage.textContent = winningRoundMessage;
   } else if (
-    (userChoice === "Scissors" && compChoice === "Rock") ||
-    (userChoice === "Rock" && compChoice === "Paper") ||
-    (userChoice === "Paper" && compChoice === "Scissors")
+    (userChoice === 'Scissors' && compChoice === 'Rock') ||
+    (userChoice === 'Rock' && compChoice === 'Paper') ||
+    (userChoice === 'Paper' && compChoice === 'Scissors')
   ) {
     resultsMessage.textContent = losingRoundMessage;
   } else {
@@ -184,3 +184,36 @@ function playRound(compChoice, userChoice) {
 }
 
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// form validation
+const playerForm = document.getElementById('playerForm');
+const playerNameInput = document.getElementById('playerName');
+const playerNameError = document.getElementById('playerNameError');
+const welcomeMessage = document.getElementById('welcomeMessage');
+const gameButtons = document.querySelectorAll('.btn');
+
+// validate player name on blur
+playerNameInput.addEventListener('blur', () => {
+  // check if input is empty
+  if (playerNameInput.validity.valueMissing) {
+    playerNameError.textContent = 'Please enter your name!';
+  } else {
+    playerNameError.textContent = '';
+  }
+});
+
+// handle form submission
+playerForm.addEventListener('submit', (e) => {
+  e.preventDefault(); // prevent default form submission
+
+  if (playerForm.checkValidity()) {
+    welcomeMessage.textContent = `Welcome, ${playerNameInput.value}! Let's play!`;
+    welcomeMessage.style.display = 'block';
+    playerForm.style.display = 'none'; // hide form
+
+    // enable game buttons
+    gameButtons.forEach((button) => (button.disabled = false));
+  } else {
+    playerNameInput.dispatchEvent(new Event('blur')); // trigger validation
+  }
+});

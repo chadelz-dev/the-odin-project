@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Carousel</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./carousel.js" defer></script>
+  </head>
+  <body>
+    <h1>Places I'd like to See</h1>
+    <div class="carousel" data-carousel>
+      <div class="carousel-frame">
+        <div class="carousel-slides" data-carousel-slides>
+          <img src="./images/image1.jpg" alt="Grand Canyon" />
+          <img src="./images/image2.jpg" alt="Yellowstone National Park" />
+          <img src="./images/image3.jpg" alt="Mount Rushmore" />
+          <img src="./images/image4.jpg" alt="Yosemite National Park" />
+          <img src="./images/image5.jpg" alt="Brooklyn Bridge" />
+        </div>
+      </div>
+      <button class="carousel-prev" data-carousel-prev>←</button>
+      <button class="carousel-next" data-carousel-next>→</button>
+      <div class="carousel-dots" data-carousel-dots></div>
+    </div>
+  </body>
+</html>
