@@ -1,0 +1,92 @@
+-- Key Concepts:
+
+-- Async Functions:
+
+ -  Simplify promise chains by returning promises implicitly.  
+
+
+-- Await:
+
+ - Pauses execution, making sequential async calls readable.  
+
+
+-- Non-Blocking:
+ -  Async code runs without freezing the app.
+
+
+-- Examples
+
+-- 1. Sequential Doubling with Async/Await
+
+
+-- What the Code Does:
+
+ - Doubles three numbers sequentially, sums them, and logs the result.
+
+
+-- How It Works:
+
+ -  Each await waits 2 seconds for the promise to resolve.
+
+
+-- Why It’s Written This Way:
+
+ -  Shows how async/await flattens nested promises.
+
+// //////
+
+
+-- 2. Original Promise Chain for Comparison
+
+-- What the Code Does:
+
+ - Same as above, but with promises.
+
+
+-- How It Works: 
+
+ - Nested .then() calls handle each resolution.
+
+
+-- Why It’s Written This Way:
+
+ - Highlights the complexity async/await avoids.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Gaps Filled
+
+
+-- Original Gap:
+
+ - No explanation of why promise chains are harder to read.  
+
+
+-- Fix:
+
+ -  Provided both versions side-by-side to contrast clarity.  
+
+
+-- Added Insight: 
+
+ - Noted the 6-second total delay to emphasize sequential execution.
+
+
+-- Why It Matters
+
+ - Real-World:
+ 
+   - Calculating totals in a checkout process with delayed price fetches.  
+
+
+ - Interview:
+ 
+   - Refactoring nested promises to async/await is a practical skill test.
+
+
+ - Real-World Relevance
+
+   - Summing shipping costs from multiple vendors in an e-commerce app.
+
+

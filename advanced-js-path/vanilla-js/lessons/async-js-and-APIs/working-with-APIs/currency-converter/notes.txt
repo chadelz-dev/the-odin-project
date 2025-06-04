@@ -1,0 +1,147 @@
+-- key concepts:
+
+-- API: 
+
+ - Exchange Rates API, no key needed, provides rates for currencies.
+
+ 
+-- UI: 
+
+ - Dropdowns for selecting currencies, text display for rates or errors, 
+ 
+ - buttons for demoing fetch methods.
+
+
+-- Why: 
+
+ - Teaches API integration, JSON parsing, D
+ 
+ - OM updates, and async handling.
+
+
+-- Real-World: 
+
+ - Currency converters are common in finance; 
+ 
+ - comparison helps with legacy code.
+
+
+-- Error Handling: 
+
+ - Checks response status, invalid currencies, and network issues.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- currency-converter.js
+
+
+-- Purpose: 
+
+ - Powers the main currency converter app, 
+ 
+ - allowing users to select currencies from dropdowns and display exchange rates.
+
+
+-- What’s Happening:
+
+ - Setup: Grabs DOM elements for base and target currency dropdowns
+ 
+ - (baseCurrencySelect, targetCurrencySelect) and rate display (exchangeRateDisplay).
+
+
+-- Load Currencies (loadCurrencies):
+
+ - Fetches currency codes from Exchange Rates API
+ 
+   - (https://api.exchangerate-api.com/v4/latest/USD).
+
+ - Extracts codes (e.g., USD, EUR) from data.rates, sorts them alphabetically.
+
+ - Populates both dropdowns with <option> elements showing only codes (e.g., USD).
+
+ - Displays errors in exchangeRateDisplay if fetch fails.
+
+
+-- Fetch Exchange Rate (fetchExchangeRate):
+
+ - Fetches rate for a base currency 
+ 
+   - (e.g., https://api.exchangerate-api.com/v4/latest/USD).
+
+ - Extracts target currency rate from data.rates[target].
+
+ - Displays rate (e.g., 1 USD = 0.92 EUR) or error in exchangeRateDisplay.
+
+
+-- Event Listeners:
+
+ - Triggers fetchExchangeRate when users select currencies in either dropdown, 
+ 
+ - if both are chosen.
+
+
+-- Key Points:
+
+ - Uses fetch for modern API calls with CORS enabled.
+
+ - Dropdowns simplify currency selection (no full names, just codes like ZAR, NOK).
+
+ - Formats rates to 2 decimal places for clarity.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- fetch-comparison.js
+
+
+-- Purpose: 
+
+ - Compares old XMLHttpRequest vs. modern fetch by fetching USD-to-EUR 
+ 
+   - rates and showing results in the UI.
+
+
+-- What’s Happening:
+
+ - Setup: Grabs DOM elements for buttons (xhrButton, 
+ 
+ - fetchButton) and output (comparisonDisplay).
+
+
+-- XMLHttpRequest (makeXhrRequest):
+
+ - Checks for XMLHttpRequest or ActiveXObject (for old browsers).
+
+ - Sends GET request to https://api.exchangerate-api.com/v4/latest/USD.
+
+ - On response (readyState 4, status 200), parses JSON and displays EUR rate 
+ 
+   - (e.g., XMLHttpRequest: USD to EUR = 0.92).
+
+ - Shows error if request fails or unsupported.
+
+
+-- Fetch (fetchRates):
+
+ - Uses fetch to get same USD rates with CORS.
+
+ - Parses JSON, displays EUR rate (e.g., Fetch: USD to EUR = 0.92).
+
+ - Handles errors with a message.
+
+
+-- Event Listeners:
+
+ - Buttons trigger makeXhrRequest or fetchRates on click, updating comparisonDisplay.
+
+
+-- Key Points:
+
+ - XMLHttpRequest is verbose with callbacks; fetch is concise with promises.
+
+ - Both show same rate in UI, highlighting fetch’s simplicity.
+
+ - Useful for understanding legacy vs. modern API calls.
+
+

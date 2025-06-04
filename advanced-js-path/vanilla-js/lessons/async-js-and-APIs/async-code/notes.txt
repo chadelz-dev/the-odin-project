@@ -1,0 +1,371 @@
+-- key concepts 
+
+-- callback
+
+ - a function passed as an argument to another function,
+
+ - executed later (eg: event listeners)
+
+   - can lead to 'callback hell' when nested.
+
+
+-- promise 
+
+ - an object representing a future value
+
+ - with states (pending, fulfilled, rejected)
+
+ - and methods (then, catch, finally)
+
+   - these solve callback nesting issues.
+
+
+-- event loop
+
+ - manages ansychronous execution in javascript's single threaded environment,
+
+ - using a call stack, callback queue, and microstack queue:
+  
+   - to handle tasks like promises and callbacks.
+
+
+-- why promises over callbacks?
+
+ - promises simplify asynchronous flow, allow chaining, handles errors better,
+
+   - and support parallel execution (Promise.all, Promise.race) 
+
+
+-- real world relevance:
+
+ - in AgTech, asynchronous code fetches weather data, processes sensor readings,
+
+   - or updates farm dashboards without blocking the user interface.
+
+// ////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Lesson Callbacks:
+
+
+-- what callbacks do:
+
+ - callbacks are functions passed to other functions to be executed later.
+
+ - often for asynchronous tasks like event handling or API calls,
+
+ - in AgTech, a callback might handle a user clicking a button,
+
+   - to display soil sensor data, or incoming weather data.
+
+
+-- how callbacks work:
+
+ - a callback is passed as an argument and invoked when,
+
+   - the outer function completes its task.
+
+ - javascript's single threaded nature relies on callbacks to:
+
+   - defer execution, managed by the event loop.
+
+
+-- why use callbacks?
+
+ - callbacks are simple for one-off async tasks (eg: event listeners),
+
+ - but can become unwiedy when chaining multiple operations,
+
+   - which leads to 'callback hell'.
+
+
+-- example, callback for sensor data button:
+
+ - this example uses a callback to display soil moisture data,
+
+   - when a button is clicked.
+
+
+// //////
+
+-- explanation of callback function:
+
+-- what:
+
+ - fetchSoilMoisture simulates an async API call,
+
+ - invoking the displaySensorData callback with the result
+
+
+-- how:
+
+ - the event listener triggers fetchSoilMoisture,
+
+   - which waits 1 second (mimicking a network delay)
+
+     - before calling the callback with mock data.
+
+
+-- why:
+
+ - callbacks are ideal for simple event-driven tasks,
+
+ - like responding to user clicks in a farm monitoring app.
+
+
+-- pitfalls:
+
+ - nesting multiple callbacks (eg: fetching moisture, then temp, then soil pH)
+
+   - creates compex, hard to read code.
+
+// ////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- lesson Promises:
+
+ - a promise is an object that represents a value avaliable later, with 3 states:
+
+-- Pending:
+
+ - initial state, waiting for resolution.
+
+-- fulfilled:
+
+ - resolved succesfully, with a value.
+
+-- rejected:
+
+ - failed with an error.
+
+ - in AgTech, promises are used to fetch weather data or
+
+ - process sensor readings without blocking the UI.
+
+// //////
+
+
+-- how promises work:
+
+ - a promise is created with (new Promise(executor))
+
+ - where the executor runs automatically, taking resolve and reject functions,
+
+ - the event loop prioritizes promise callbacks (microstacks) over regular callbacks
+
+   - ensuring timely execution.
+
+ - methods like .then, .catch, and .finally handle results, errors or cleanup.
+
+
+-- why use promises?
+
+ - promises avoid callback hell by chaining operations, providing better handling,
+
+ - and support parallel tasks (Promise.all, Promise.race).
+
+ - they are standard in modern APIs like fetch.
+
+
+ -- example, fetching weaather data with promises:
+
+  - this example fetches weather data for a farm location,
+
+  - enhancing the original getData example with an AgTech context.
+
+
+-- index.html 
+
+ - same as above, add a script before callback.js
+
+// //////
+
+
+-- explanation of promise function:
+
+-- what:
+
+ - fetchWeatherData returns a promise that resolves with weather data,
+
+ - or rejects with an error.
+
+
+-- how:
+ 
+ - the executor runs immediately, simulating an API call,
+
+ - .then chains handle the result,
+
+ - .catch handles errors, and 
+
+ - .finally logs completion.
+
+ - the  event loop ensures .then callbacks run after the promises settles.
+
+
+-- why:
+
+ - promises allow clean chaining (eg: processing temperature after fetching)
+
+ - nd centralized error handling, 
+ 
+ - this is ideal for AgTech apps, fetching multiple data sources.
+
+
+-- real world relevance:
+
+ - used in farm management systems to fetch weather or soil data,
+
+ - updating dashboards without freezing the UI.
+
+ - common in junior interviews for handling asynchronous tasks.
+
+ // ///////////////////////////////////////////////////////////////////////////
+ // ///////////////////////////////////////////////////////////////////////////
+
+
+ -- lesson, Promise.all and Promise.race:
+
+ -- what they do
+
+  - Promise all:
+
+    - resolves when all promises in an array succeed.
+
+    - returning their results, or rejects on the first failure.
+
+
+  - Promise.race:
+
+    - resolves or rejects as soon as any promise in the array settles,
+
+    - returning its result/error
+
+    - in AgTech, Promise.all fetches multiple sensor readings,
+
+      - Promise.race selects the fastest weather API 
+
+
+-- how they work:
+
+ - Promise.all:
+
+   - optimizes parallel data fetching (eg: farm sensors) 
+
+ - Promise.race:
+
+   - ensures quick responses by picking the fastest source.
+
+
+-- example, fetching multiple sensor data with Promise.all:
+
+ - this fetches soil moisture and temperature data simultaneously,
+
+   - using a dedicated button and output div.
+
+// //////
+
+
+-- explanation of Promise.all function:
+
+-- what:
+
+ - Promise.all:
+
+   - fetches soil and temperature data,
+
+   - displaying both in multiSensorOutput, or showing an error.
+
+
+-- how:
+
+ - promises run in parallel, and .then receives an array of results.
+
+ - the event loop ensures resolution before callback execution.
+
+
+-- why:
+
+ - efficient for fetching multiple data sources, reducing wait time.
+
+ - common in AgTech dashboards and junior interviews for parallel async tests.
+
+
+-- real world relevance:
+
+ - used to aggregate sensor data for real-time farm monitoring.
+
+ // ///////////////////////////////////////////////////////////////////////////
+ // ///////////////////////////////////////////////////////////////////////////
+
+
+-- what the event loop does:
+
+ - the event loop manages javascripts single-threaded, asynchronous execution,
+
+ - processing:
+
+   - callstack:
+
+     - synchronous code, callbacks, and promises.
+
+   - callback queue:
+
+     - tasks like setTimeout or event listeners.
+
+   - microstack queue:
+
+     - promise callbacks, prioritized over callbacks.
+
+     - in AgTech, it keeps dashboards responsive during data fetches.
+
+
+-- how it works:
+
+ - the event loop checks the call stack.
+
+ - when empty, it prioritizes microstacks (promises) over callbacks.,
+
+   - ensuring timely async execution
+
+
+-- example, event loop with promises and callbacks:
+
+ - this demo shows the event loop's prioritization,
+
+   - using a dedicated button and output.
+
+// //////
+
+
+-- explanation of event loop function:
+
+-- what:
+
+ - logs messages to eventLoopOutput to show execution order.
+
+
+-- how:
+
+ - synchronous code (Start, End) runs first.
+
+ - the promise's .then (microstack) runs next,
+
+ - followed by setTimeout (callback queue),
+
+
+-- why: 
+
+ - demonstrates the event loop's prioritization of promises,
+
+   - critical for responsive AgTech apps.
+
+
+-- output:
+
+ - on button click.
+
+   - Start End Promise Timeout
+

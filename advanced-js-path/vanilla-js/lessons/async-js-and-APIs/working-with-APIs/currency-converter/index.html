@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./currency-converter.js" defer></script>
+    <script src="./fetch-comparison.js" defer></script>
+  </head>
+  <body>
+    <!-- currency converter -->
+    <h1>Currency Converter</h1>
+    <label for="base-currency-select">Base Currency:</label>
+    <select id="base-currency-select"></select>
+    <label for="target-currency-select">Target Currency:</label>
+    <select id="target-currency-select"></select>
+
+    <div id="exchange-rate-display"></div>
+
+    <!-- fetch comparison -->
+    <h2>Fetch Comparison</h2>
+    <button id="xhr-button">Fetch with XMLHttpRequest</button>
+    <button id="fetch-button">Fetch with Modern fetch</button>
+
+    <div id="comparison-display"></div>
+  </body>
+</html>

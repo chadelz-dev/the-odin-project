@@ -1,0 +1,229 @@
+-- API key: MEl0mxIamfzlVlbIhAAc4WXvnswOQg46
+
+//  ///////////////////////////////////////////////////////////////////////////
+
+-- key concepts:
+
+-- fetch API:
+
+ - modern JS method for HTTP requests, returns a promise.
+
+
+-- promises:
+
+ - handle async results with .then() (success) and .catch() (error)
+
+
+-- abort controller:
+
+ - cancels fetch requests using a signal
+
+
+-- DOM manipulation:
+
+ - dynamically updates HTML (eg: creating images)
+
+
+-- event listeners:
+
+ - respond to user actions (eg: clicking a button)
+
+
+-- CORS:
+
+ - allow cross origin API requests (eg: GIPHY)
+
+
+-- accessibility:
+
+ - alt text for images support screen readers.
+
+
+-- lesson overviews:
+
+ - builds a GIPHY search app that fetches GIFs based on user input,
+
+ - displays thumbnails, and shows a full size GIF on click.
+
+ - teaches async requests, cancellation, and DOM updates.
+
+//  ///////////////////////////////////////////////////////////////////////////
+
+
+-- setup and DOM 
+
+-- what it does:
+
+ - waits for DOM to load, gets UI elements, sets up AbortController.
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const giphyApiKey = 'YOUR_GIPHY_API_KEY'; // GIPHY API key placeholder
+  const giphySearchInput = document.getElementById('giphy-search-input'); // Search input
+  const searchBtn = document.getElementById('search-btn'); // Search button
+  const cancelBtn = document.getElementById('cancel-btn'); // Cancel button
+  const giphyResultArea = document.getElementById('giphy-result-area'); // Thumbnail container
+  const giphyOutput = document.getElementById('giphy-output'); // Full-size GIF
+  let giphyAbortController = new AbortController(); // For fetch cancellation
+});
+
+
+-- how it works:
+
+ - DOMContentLoaded: 
+
+   - ensures DOM is ready before accessing elements.
+
+
+ - getElementById:
+
+   - grabs input, buttons, and displays areas.
+
+
+ - AbortControllers:
+
+   - creates signal to cancel fetch requests.
+
+
+-- why this way: 
+
+ - prevents null errors by waiting for DOM 
+
+ - clear variable names avoid conflicts
+
+ - placeholder key avoids exposing real API key
+
+//  ///////////////////////////////////////////////////////////////////////////
+
+
+-- search handler:
+
+-- what it does:
+
+ - fetches GIFs based on input, displays thumbnails, shows full-sized GIF on click
+
+
+-- code:
+
+searchBtn.addEventListener('click', () => {
+  const query = giphySearchInput.value.trim(); // Get cleaned input
+  if (!query) {
+    giphyResultArea.textContent = 'Please enter a search term';
+    giphyOutput.src = '#';
+    giphyOutput.alt = 'No GIF selected';
+    return;
+  }
+
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${encodeURIComponent(query)}&limit=10`; // Build API URL
+
+  fetch(url, { mode: 'cors', signal: giphyAbortController.signal }) // Fetch GIFs
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      giphyResultArea.innerHTML = ''; // Clear old results
+      giphyOutput.src = '#';
+      giphyOutput.alt = 'No GIF selected';
+      if (!data.data || !data.data.length) {
+        giphyResultArea.textContent = 'No GIFs found';
+        return;
+      }
+
+      data.data.forEach(gif => {
+        const img = document.createElement('img'); // Create thumbnail
+        img.src = gif.images.fixed_height_small.url;
+        img.alt = gif.title || 'GIF'; // Accessibility
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          giphyOutput.src = gif.images.original.url; // Show full-size GIF
+          giphyOutput.alt = gif.title || 'Selected GIF';
+          giphyResultArea.textContent = 'New GIF selected';
+          document.querySelectorAll('#giphy-result-area img').forEach(thumbnail => {
+            thumbnail.style.border = 'none';
+          });
+          img.style.border = '2px solid blue'; // Highlight thumbnail
+        });
+        giphyResultArea.appendChild(img);
+      });
+    })
+    .catch(error => {
+      giphyResultArea.textContent = error.name === 'AbortError' ? 'Search cancelled' : `Error: ${error.message}`;
+      console.error('Fetch error:', error);
+      giphyOutput.src = '#';
+      giphyOutput.alt = 'No GIF selected';
+    });
+});
+
+
+-- how it works:
+
+ - validates input, exits if empty.
+
+ - builds URL with encoded query and 10-result limit.
+
+ - fetch: sends request with CORS and cancel signal.
+
+ - checks response, parses JSON.
+
+ - clears old results, displays 'no GIFs found' if empty.
+
+ - creates clickable thumbnails, updates full-sized GIF on click, add border highlight.
+
+ - handles errors (eg: network, abort)
+
+
+-- why this way:
+
+ - trim() and validation prevents bad API calls.
+
+ - encodeURIComponent handles special characters in URLs
+
+ - CORS enables external API access.
+
+ - dynamic <img> creation scales with API data.
+
+ - Error handling clarifies abort vs. other issues.
+
+ - alt text ensures accessibility.
+
+//  ///////////////////////////////////////////////////////////////////////////
+
+
+-- cancel handler:
+
+-- what it does:
+
+ - cancels fetch, resets UI.
+
+
+-- code:
+
+cancelBtn.addEventListener('click', () => {
+  giphyAbortController.abort(); // Stop fetch
+  giphyResultArea.textContent = 'Search cancelled';
+  giphyOutput.src = '#';
+  giphyOutput.alt = 'No GIF selected';
+  giphyAbortController = new AbortController(); // Reset for next fetch
+});
+
+
+-- how it works:
+
+ - abort(): triggers AbortError to stop fetch.
+
+ - updates UI, clears GIF.
+
+ - Resets AbortController for next fetch in the future.
+
+
+-- why this way:
+
+ - cancels unnecessary requests, saves bandwitch.
+
+ - new controller needed as single use.
+
+ - UI feedback confirms action.
+
+
+ 

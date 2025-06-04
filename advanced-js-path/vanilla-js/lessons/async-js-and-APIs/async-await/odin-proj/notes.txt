@@ -1,0 +1,118 @@
+-- key concepts:
+
+-- async functions:
+
+ - declared with async keyword, they always return a promise,
+
+ - returning a value resolves the promise, throwing an error rejects it.
+
+
+-- await keyword:
+
+ - pauses an async function until a promise resolves.
+
+ - returning the resolved value, only works inside an async function.
+
+
+-- error handling:
+
+ - use .catch() on the promise or try/catch block inside the async function.
+
+
+-- purpose:
+
+ - simplifies asynchronous code,
+
+ - making it read like synchronous code, while returning non-blocking behavior.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- example 1 (the odin proj):
+
+-- 1. basic async function:
+
+-- what the code does:
+
+ - returns a persons info from a simulated server after a delay.
+
+
+-- how it works:
+
+ - await pauses until the promise resolves with the server data, then filters it
+
+
+-- why it's written this way:
+
+ - avoids .then() chains for cleaner more readable code.
+
+// //////
+
+-- 2. error handling with try/catch:
+
+-- what the code does:
+
+ - attempts to fetch data, handling errors if the server fails.
+
+
+-- how it works:
+
+ - try runs the async operation, catch handles any rejection.
+
+
+-- why it's written this way:
+
+ - try/catch mimics synchronous error handling, improving clarity.
+
+// //////
+
+-- 3. practical example fetching a radnom quote:
+
+ -- what the code does:
+
+  - fetches a quote from a free API and logs it.
+
+
+-- how it works:
+
+ - await handles the fetch and JSON parsing sequentially.
+
+
+-- why it's written this way:
+
+ - shows real-world API call without needing an API key.
+
+ // //////
+
+
+ -- gaps filled:
+
+ -- original gap:
+
+  - giphy example required an API key, which is impractical for quick learning.
+
+
+-- fix:
+
+ - replaced it with a free quotable API example that does not need a key.
+
+
+-- added insight:
+
+ - explained why try/catch is preferred for inline error handling over .catch()
+
+
+-- why it matters:
+
+-- real world relevance:
+
+ - used in API driven apps (eg: fetching a users data from a server)
+
+
+-- interview:
+
+ - refactoring promise chains to async/await is a common junior dev task.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+ 

@@ -1,0 +1,27 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+button {
+  margin: 10px 0;
+  padding: 10px;
+  margin-top: 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(249, 193, 90);
+  color: rgb(81, 81, 81);
+  font-size: 16px;
+}
+
+.result {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+
+  border-radius: 10px;
+}
+
+.error {
+  color: red;
+}

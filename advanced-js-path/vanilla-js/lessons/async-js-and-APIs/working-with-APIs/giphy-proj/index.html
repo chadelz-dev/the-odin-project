@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch API Explorer</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./fetch-explorer.js" defer></script>
+  </head>
+  <body>
+    <h1>Giphy Search</h1>
+
+    <!-- input field for user to enter a search term -->
+    <input type="text" id="giphy-search-input" placeholder="Search GIFs" />
+
+    <!-- buttons to trigger search and cancel operations -->
+    <button id="search-btn">Search</button>
+    <button id="cancel-btn">Cancel</button>
+
+    <!-- area to display thumbnail results -->
+    <div id="giphy-result-area"></div>
+
+    <!-- attribution to comply with GIPHY TOS -->
+    <p>Powered by GIPHY</p>
+
+    <!-- image element to the selected full sized GIF -->
+    <img src="#" alt="Selected GIF" id="giphy-output" />
+  </body>
+</html>

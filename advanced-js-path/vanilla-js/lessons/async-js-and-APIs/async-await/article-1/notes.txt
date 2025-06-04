@@ -1,0 +1,187 @@
+-- key concepts:
+
+-- async functions:
+
+ - always return a promise, wrapping non promise values automatically.
+
+
+-- await:
+
+ - suspends execution until a promise settles, usable only in async functions.
+
+
+-- thenables:
+
+ - Objects with a .then() method can be awaiated.
+
+
+-- error handling:
+
+ - errors throw exceptions, caught with try/catch or .catch()
+
+
+-- Promise.all:
+
+ - await multiple promises at once.
+
+// //////
+
+
+-- examples:
+
+-- 1. basic async/await with delay:
+
+
+-- what the code does:
+
+ - Waits 1 second, then logs a message.
+
+
+-- How It Works:
+
+ -  await pauses until the promise resolves with "done!".
+
+
+-- Why It’s Written This Way:
+
+ -  Demonstrates the pause effect cleanly.
+
+// //////
+
+
+-- 2. handling multiple API calls with Promise.all:
+
+-- What the Code Does:
+
+ -  Fetches two quotes simultaneously and logs them.
+
+
+-- How It Works:
+
+ -  Promise.all resolves when all promises settle; await gets the results.
+
+
+-- Why It’s Written This Way:
+
+ -  Shows efficient parallel async operations.
+
+ // //////
+
+
+ -- 3. thenable example:
+
+-- What the Code Does: 
+
+ - Doubles a number after a delay using a thenable object.
+
+
+-- How It Works: 
+
+ - await calls the .then() method of the thenable.
+
+
+-- Why It’s Written This Way: 
+
+ - Shows compatibility beyond standard promises.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- Gaps Filled
+
+ - Original Gap:
+ 
+   - Limited real-world context beyond avatar fetching.  
+
+
+ - Fix:
+ 
+   - Added a multi-quote fetch example to show parallel processing, 
+   
+   - a common real-world need.  
+
+
+-- Added Insight: 
+
+ - Clarified thenables as a rare but useful edge case.
+
+
+-- Why It Matters:
+
+ - Real-World: 
+ 
+   - Fetching multiple resources 
+   
+   - (e.g., product images for an e-commerce page).  
+
+
+-- Interview: 
+
+ - Explaining Promise.all with async/await is a frequent question.
+
+
+-- Real-World Relevance:
+
+ - Loading multiple user reviews at once for a product page.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+-- fetching multiple quotes with timeout using AbortController:
+
+-- how it works:
+
+ - abort AbortController
+
+   - creates a controller to cancel fetch requests if they take too Loading
+
+
+ - setTimeout:
+
+   - triggers controller.abort() after a 5s timeout
+
+
+ - Promise.all:
+
+   - runs multiple fetch requests concurrently, awaiting all responses
+
+
+ - response handling:
+
+   - chicks if each response is OK (200-299) parses JSON and formats the quotes.
+
+// //////
+
+
+-- why its written this way:
+
+ - AbortController:
+
+   - prevents handling requests, improving user expereience.
+
+
+ - Promise.all:
+ 
+   - fetches quotes concurrently for efficiency rather than sequentially.
+
+// //////
+
+
+-- real world relevance:
+
+ - common in apps fetching multiple resources concurrently
+
+   -eg: loading loading product data for an e-commerce simultaneously
+
+ - timeouts ensure users are not left stuck waiting for nothing.
+
+
+-- interview context:
+
+ - tests async patterns, Promise.all and error handling,
+
+ - modern APIs (fetch and abort controller) are common.
+
+   - a similar question may be:
+
+     - fetch data from multiple endpoints with a timeout.
+
