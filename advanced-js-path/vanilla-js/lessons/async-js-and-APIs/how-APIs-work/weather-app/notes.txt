@@ -1,0 +1,363 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+-- Modular Weather App with Open-Meteo API and Webpack Dev Server
+
+-- module 1:
+
+-- understanding APIs and constructing requests:
+
+
+-- what is an API (application programming interface)?
+
+ - an API lets your app request data from a server, like ordering food:
+
+   - you send a request (eg: "get weather from Berlin"),
+
+   - the server responds with JSON (eg: current: { { temperature_2m: 15.2 } } )
+
+// //////
+
+-- how to construct an API request:
+
+ - for any API:
+
+ - find the docs: 
+   
+   - Open-Meteo's docs ( https://open-meteo.com/en/docs) list:
+
+   - endpoints:
+
+     - https://api.open-meteo.com/v1/forecast (weather),
+
+     - https://geocoding-api.open-meteo.com/v1/search (geocoding).
+
+   - parameters: 
+    
+     - query strings (eg: latitude=52.52&longitude=13.41&t=temperature_2m,wind_speed_10m)
+
+     - response: 
+
+     - JSON structure
+
+
+ - identify parameters:
+
+   - weather API:
+
+     - requires latitude, longitude, current=temperature_2m,wind_speed_10m
+
+     - comma separated fields within current
+
+
+   - geocoding API:
+
+     - requires 'name' (city query), and 'count' (number of results)
+
+
+ - building the request url:
+
+   - use ? for the first parameter and & for subsequent parameters
+
+   - for the weather:
+
+     - https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m
+
+   - for the geocoding:
+
+     - https://geocoding-api.open-meteo.com/v1/search?name=Berlin&count=1
+
+       - but using a variable from the input field for the name:
+
+       - https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5`
+
+// //////
+
+
+-- geocoding and weather API intereaction:
+
+ - geocoding:
+
+   - the user types a city (eg: Berlin) into the input field.
+
+   - the geocoding API returns a list of matching cities with lat and long.
+
+
+ - weather query:
+
+   - these coordinates are used to build the weather API URL,
+
+     - dynamically replacing hardcoded values.
+
+
+ - input role:
+
+   - the <input id=cityInput> captures the user's city name,
+
+   - triggering geocoding to get coordinates,
+
+     - which are then used for the weather request.    
+
+
+-- API's:
+
+ - similarities:
+
+   - use HTTP query strings (?key=value&key2=value2) and returns JSON.
+
+
+ - differences:
+
+   - endpoints, parameter names, and authentication vary (Open-Meteo needs no key)
+
+
+ - approach:
+
+   - read docs for specifics.
+
+   - log JSON to understand structure.
+
+   - extract fields based on docs and logs.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- module 2:
+
+-- what is webpack?
+
+ - bundles JS and assets (eg: CSS) into a single file (bundle.js) for browsers,
+
+   - handling import/export.
+
+
+-- what is webpack dev server?
+
+ - a server that:
+
+   - serves the app locally (http://localhost:8080),
+
+   - reloads the browser on file changes (live reloading).
+
+   - runs in memory for speed.
+
+
+-- why use it?
+
+ - modularity: supports import/export.
+
+ - live reloading: updates instantly, saving time.
+
+ - asset management: handles CSS, images, etc via loaders.
+
+
+-- how to set up webpack?
+
+ - learn by:
+
+   - reading docs: https://webpack.js.org/ = covers entry, output and dev server.
+
+   - starting simple: use minimal config options (eg: entry, output, dev server).
+
+   - testing: add features like devServer and debug errors.
+
+// //////
+
+
+-- webpack setup steps:
+
+-- initialize Node.js Project
+
+npm init -y
+
+ - why?
+
+ - creates package.json for dependencies
+
+// //////
+
+
+-- Install Dependencies
+
+npm install webpack webpack-cli webpack-dev-server style-loader css-loader --save-dev
+
+- why?
+
+- webpack and webpack-cli for bundling.
+
+- webpack-dev-server: for live reloading.
+
+- style-loader and css-loader: for CSS.
+
+// //////
+
+
+-- create webpack.config.js
+
+
+const path = require("path");
+
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
+  mode: "development",
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname),
+    },
+    port: 8080,
+    open: true,
+    hot: true,
+  },
+};
+
+
+ - explanation:
+
+ - path: handles file paths cross platform.
+
+ - entry: starts bundling at index.js
+
+ - output: creates dist/bundle.js
+
+ - mode: development for readable code.
+
+ - module rules: 
+   
+   - processes CSS with style-loader (injects CSS)
+   - reads CSS with CSS-loader (converts CSS to JS)
+
+ - dev server:
+
+   - static .directory: serves index.html from project root.
+
+   - port: runs locally on localhost:8080.
+
+   - open: opens browser.
+
+   - hot: enables live reloading.
+
+ - decision-making: 
+
+   - minimal config: added devServer for live updates.
+
+// //////
+
+
+-- update package.json:
+
+
+"scripts": {
+  "start": "webpack serve",
+  "build": "webpack"
+},
+
+
+ - explanation:
+
+ - why:
+
+   - npm start runs the dev server,
+
+   - npm run build creates the bundle.js file.
+
+// //////
+
+
+-- run:
+
+ - dev: npm start (serves at localhost:8080, reloads on changes) 
+
+ - build: npm run build (creates dist/bundle.js)
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- project structure:
+
+weather-app/
+├── src/
+│   ├── index.js
+│   ├── weather.js
+│   ├── display.js
+│   ├── utils.js
+│   ├── styles.css
+├── index.html
+├── package.json
+├── webpack.config.js
+
+
+ - package.json:
+
+   - created by npm init
+
+
+ - everything else:
+
+   - created by me using mkdir and touch.
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- module 3:
+
+-- html structure (index.html):
+
+ - provides all the UI structure, including input fields that drives geocoding.
+
+
+-- code:
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Weather App</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Weather App</h1>
+    <input type="text" id="cityInput" placeholder="Enter city name">
+    <div id="suggestions"></div>
+    <button id="getWeatherBtn">Get Weather</button>
+    <div id="weatherDisplay"></div>
+  </div>
+  <script src="dist/bundle.js"></script>
+</body>
+</html>
+
+
+-- explanation:
+
+ - elements: 
+
+   - <input id="cityInput"> : captures city name for geocoding.
+
+   - <div id="suggestions"> : shows autocomplete suggestions.
+
+   - <button id="getWeatherBtn"> : triggers weather fetch.
+
+   - <div id="weatherDisplay"> : display results.
+
+
+ - IDs: for js access.
+
+ - script: loads webpacks bundle.js.
+
+ - CSS: imported via index.js (not in the html file = because of webpack).
+
+ - decision-making: minimal UI, container for styling.
+
+// ////////////////////////////////////////////////////////////////////////////

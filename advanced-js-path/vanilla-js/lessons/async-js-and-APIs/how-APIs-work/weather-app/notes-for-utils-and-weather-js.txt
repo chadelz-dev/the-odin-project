@@ -1,0 +1,161 @@
+// ////////////////////////////////////////////////////////////////////////////
+
+
+-- module 4 (utils.js = utility functions):
+
+-- why?
+
+ - reusable helpers to avoid duplication. (Single Responsibility Principle)
+
+
+-- code:
+
+export function getElement(selector) {
+  return document.querySelector(selector);
+}
+
+
+-- explanation:
+
+ - function: wraps querySelector. 
+
+ - why? simplifies DOM access, reusable.
+
+ - Export: for other modules to use.
+
+ - decision-making: used querySelector for flexibility.
+
+ // ///////////////////////////////////////////////////////////////////////////
+
+
+ -- module 5 (weather.js = weather API interaction and logic):
+
+ -- why?
+
+  - handles API calls for modularity (SRP).
+
+
+-- code:
+
+export async function fetchWeather(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}¤t=temperature_2m,wind_speed_10m`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("Raw weather JSON:", data);
+    const temperature = data.current.temperature_2m;
+    const windSpeed = data.current.wind_speed_10m;
+    console.log("Extracted weather data:", { temperature, windSpeed });
+    return { temperature, windSpeed };
+  } catch (error) {
+    console.error("Error fetching weather:", error);
+    return null;
+  }
+}
+
+export async function fetchCities(query) {
+  const url = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("Raw city JSON:", data);
+    return data.results || [];
+  } catch (error) {
+    console.error("Error fetching cities:", error);
+    return [];
+  }
+}
+
+// //////
+
+
+-- explanation:
+
+-- functions:
+
+ - fetchWeather: uses lat, lon, to fetch weather data from the API.
+
+   - (temperature and wind speed)
+
+ - fetchCities: uses query (user input) for city suggestions.
+
+   - retrieves up to 5 city suggestions, based on the user input.
+
+
+-- geocoding:
+
+ - takes a query string from user input (eg: berlin)
+
+ - returns an array of city objects containing:
+ 
+   - cities names with latitude, longitude and country. 
+   
+   - (required for the weather API).
+   
+ - example: { results: [ {name: "Berlin", latitude: 52.52,
+              longitude: 13.41, country: "Germany" }, ... ] }
+
+
+ - weather query:
+
+   - uses coordinates from fetchCities to build th URL.
+
+
+ - async/await:
+
+   - simplifies promises vs .then():
+
+   fetch(url).then(response => response.json()).then(data => {...});
+
+
+ - console.logs:
+
+   - show raw and extracted data. (for deeper understanding) of what I am doing.
+
+
+ - decision-making:
+
+   - isolated API logic, descriptive names, and async/await.
+
+
+ -- try/catch:
+
+  - in fetchWeather:
+
+    - try: 
+
+      - executes the API call and JSON parsing, if successful it extracts:
+
+      - temperature_2m and wind_speed_10m from the response and,
+
+        - returns them as an object.
+
+    - catch:
+
+      - captures errors (eg: network issues, invalid coords, or API failures)
+
+      - logs the error to the console, and returns null to indicate failure,
+
+        - without crashing the application.
+
+
+ - in fetchCities:
+
+   - try: 
+
+     - performs the API call and JSON parsing,
+
+     - returns the results array from the response,
+
+       - (or an empty array if results is undefined).
+
+   - catch:
+
+     - handles errors (eg: network failure, invalid query, or API errors),
+
+     - logs the error to the console and returns an empty array to,
+
+       - ensure the application continues gracefully.
+
+// ////////////////////////////////////////////////////////////////////////////
+
